@@ -34,7 +34,7 @@ class _CardEstatisticaWidgetState extends State<CardEstatisticaWidget> {
             right: 25,
           ),
           decoration: BoxDecoration(
-            color: cores.azulClaro,
+            color: cores.azulClaro3,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(

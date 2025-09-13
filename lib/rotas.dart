@@ -3,53 +3,138 @@ import 'package:cas_natal_app_admin/Admin/Gestao%20aula/gestao_aula_page.dart';
 import 'package:cas_natal_app_admin/Admin/Gestao%20curso/gestao_curso_page.dart';
 import 'package:cas_natal_app_admin/Admin/Gestao%20glossario/gestao_glossario_page.dart';
 import 'package:cas_natal_app_admin/Admin/admin_page.dart';
+import 'package:cas_natal_app_admin/Configuracoes/config_page.dart';
+import 'package:cas_natal_app_admin/Configuracoes/editar_perfil_page.dart';
+import 'package:cas_natal_app_admin/Configuracoes/senha_page.dart';
+import 'package:cas_natal_app_admin/Estatisticas/estatistica_page.dart';
+import 'package:cas_natal_app_admin/nav.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
 class AppNavigation {
   AppNavigation._();
+  static String initR = '/admin';
+
+   /// KEYS DE NAVEGAÇÃO
+  /// navegação global raiz do app, serve para navegar em telas fora da estrutura do shell, como:
+  /// tela de login, splash screen e pags que nao fazem parte da navegação por abas
+  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+
+  /// navegadores independentes, usados por cada StatefulShellBranch.
+  /// mantém pilhas de navegação separadas
+  static final _rootNavigatorGestao = GlobalKey<NavigatorState>(
+    debugLabel: 'shellGestao',
+  );
+  static final _rootNavigatorEstatistica = GlobalKey<NavigatorState>(
+    debugLabel: 'shellEstatistica',
+  );
+  static final _rootNavigatorConfiguracoes = GlobalKey<NavigatorState>(
+    debugLabel: 'shellConfiguracoes',
+  );
 
   static final GoRouter rotas = GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: '/admin',
-    routes: [
-      GoRoute(
-        path: '/admin',
-        name: 'Admin',
-        builder: (context, state) {
-          return AdminPage(key: state.pageKey);
-         },
-        routes: [
-          GoRoute(
-            path: '/gestaoUsers',
-            name: 'GestaoUsers',
-            builder: (context, state) {
-              return GestaoUsersPage(key: state.pageKey);
-            },
+    initialLocation: initR,
+    navigatorKey: _rootNavigatorKey,
+    routes: <RouteBase>[
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return NavigationBarWidget(navigationShell: navigationShell);
+        },
+
+        branches: <StatefulShellBranch>[
+          ////////////// BRANCH -> GESTAO
+          StatefulShellBranch(
+            navigatorKey: _rootNavigatorGestao,
+            routes: [
+              GoRoute(
+                path: '/admin',
+                name: 'Admin',
+                builder: (context, state) {
+                  return AdminPage(key: state.pageKey);
+                },
+                routes: [
+                  GoRoute(
+                    path: '/gestaoUsers',
+                    name: 'GestaoUsers',
+                    builder: (context, state) {
+                      return GestaoUsersPage(key: state.pageKey);
+                    },
+                  ),
+                  GoRoute(
+                    path: '/gestaoCurso',
+                    name: 'GestaoCurso',
+                    builder: (context, state) {
+                      return GestaoCursoPage(key: state.pageKey);
+                    },
+                  ),
+                  GoRoute(
+                    path: '/gestaoAula',
+                    name: 'GestaoAula',
+                    builder: (context, state) {
+                      return GestaoAulaPage(key: state.pageKey);
+                    },
+                  ),
+                  GoRoute(
+                    path: '/gestaoGlossario',
+                    name: 'GestaoGlossario',
+                    builder: (context, state) {
+                      return GestaoGlossarioPage(key: state.pageKey);
+                    },
+                  ),
+                      
+                ],
+              ),
+            ],
           ),
-          GoRoute(
-            path: '/gestaoCurso',
-            name: 'GestaoCurso',
-            builder: (context, state) {
-              return GestaoCursoPage(key: state.pageKey);
-            },
+
+          ////////////// BRANCH -> ESTATISTICA
+          StatefulShellBranch(
+            navigatorKey: _rootNavigatorEstatistica,
+            routes: [
+              GoRoute(
+                path: '/estatistica',
+                name: 'Estatistica',
+                builder: (context, state) {
+                  return EstatisticasPage(key: state.pageKey);
+                },
+              )
+            ],
           ),
-          GoRoute(
-            path: '/gestaoAula',
-            name: 'GestaoAula',
-            builder: (context, state) {
-              return GestaoAulaPage(key: state.pageKey);
-            },
+
+          ////////////// BRANCH -> CONFIGURAÇÕES
+          StatefulShellBranch(
+            navigatorKey: _rootNavigatorConfiguracoes,
+            routes: [
+              GoRoute(
+                path: '/configuracoes',
+                name: 'Configuracoes',
+                builder: (context, state) {
+                  return ConfiguracoesPage(key: state.pageKey);
+                },
+                routes: [
+                  GoRoute(
+                    path: '/editarPerfil',
+                    name: 'EditarPerfil',
+                    builder: (context, state) {
+                      return EditarPerfilPage(key: state.pageKey);
+                    },
+                  ),
+                  GoRoute(
+                    path: '/redefinirSenha',
+                    name: 'RedefinirSenha',
+                    builder: (context, state) {
+                      return RedefinirSenhaPage(key: state.pageKey);
+                    },
+                  ),
+                ]
+              )
+            ],
           ),
-          GoRoute(
-            path: '/gestaoGlossario',
-            name: 'GestaoGlossario',
-            builder: (context, state) {
-              return GestaoGlossarioPage(key: state.pageKey);
-            },
-          ),
-              
+          
         ],
       ),
     ],
   );
+
 }

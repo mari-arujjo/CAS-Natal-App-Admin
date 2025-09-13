@@ -9,60 +9,44 @@ class AdminPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('CAS Natal-RN (ADMIN)')),
+      appBar: AppBar(
+        title: const Text('CAS Natal-RN (ADMIN)'),
+      ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(30),
-          child: Column(
+          padding: const EdgeInsets.all(30),
+          child: GridView.count(
+            crossAxisCount: 2,
+            crossAxisSpacing: 15,
+            mainAxisSpacing: 15,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ButtonQuadrado(
-                    txt: 'Gestão de usuários', 
-                    onPressed: () {
-                      context.goNamed('GestaoUsers');
-                    },
-                    width: 150,
-                    height: 150,
-                    icon: Icons.people,
-                  ),
-                  SizedBox(width: 15),
-                   ButtonQuadrado(
-                    txt: 'Gestão de usuários', 
-                    onPressed: () {
-                      context.goNamed('GestaoCurso');
-                    },
-                    width: 150,
-                    height: 150,
-                    icon:Icons.school,
-                  ),
-                ],
+              ButtonQuadrado(
+                txt: 'Gestão de usuários',
+                onPressed: () {
+                  context.goNamed('GestaoUsers');
+                },
+                icon: Icons.people,
               ),
-              SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ButtonQuadrado(
-                    txt: 'Cadastrar aula', 
-                    onPressed: () {
-                      context.goNamed('GestaoAula');
-                    },
-                    width: 150,
-                    height: 150,
-                    icon: Icons.play_circle_fill,
-                  ),
-                  SizedBox(width: 15),
-                   ButtonQuadrado(
-                    txt: 'Cadastrar sinal no glossário', 
-                    onPressed: () {
-                      context.goNamed('GestaoGlossario');
-                    },
-                    width: 150,
-                    height: 150,
-                    icon: CupertinoIcons.book_solid,
-                  ),
-                ],
+              ButtonQuadrado(
+                txt: 'Gestão de cursos',
+                onPressed: () {
+                  context.goNamed('GestaoCurso');
+                },
+                icon: Icons.school,
+              ),
+              ButtonQuadrado(
+                txt: 'Cadastrar aula',
+                onPressed: () {
+                  context.goNamed('GestaoAula');
+                },
+                icon: Icons.play_circle_fill,
+              ),
+              ButtonQuadrado(
+                txt: 'Cadastrar sinal no glossário',
+                onPressed: () {
+                  context.goNamed('GestaoGlossario');
+                },
+                icon: CupertinoIcons.book_solid,
               ),
             ],
           ),

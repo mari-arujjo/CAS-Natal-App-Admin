@@ -5,13 +5,11 @@ class CardMenorEstatisticaWidget extends StatefulWidget {
   final String txt;
   final String dado;
   final IconData ico;
-  final Color cor;
   const CardMenorEstatisticaWidget({
     super.key,
     required this.txt,
     required this.dado,
     required this.ico,
-    required this.cor,
   });
 
   @override
@@ -38,7 +36,7 @@ class _CardMenorEstatisticaWidgetState
             right: 10,
           ),
           decoration: BoxDecoration(
-            color: widget.cor,
+            color: cores.azulClaro3,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(

@@ -11,7 +11,7 @@ class AppWidget extends StatelessWidget {
     final cores = Cores();
 
     return MaterialApp.router(
-      title: 'CAS Natal + IFRN',
+      title: 'CAS Natal + IFRN ADMIN',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,

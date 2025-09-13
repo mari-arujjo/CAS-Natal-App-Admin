@@ -5,16 +5,12 @@ import 'package:cas_natal_app_admin/cores.dart';
 class ButtonQuadrado extends StatefulWidget {
   final String txt;
   final VoidCallback onPressed;
-  final double width;
-  final double height;
   final IconData icon;
 
   const ButtonQuadrado({
     super.key,
     required this.txt,
     required this.onPressed,
-    required this.width,
-    required this.height,
     required this.icon,
   });
 
@@ -30,34 +26,40 @@ class _ButtonQuadradoState extends State<ButtonQuadrado> {
     final cor = Cores();
 
     return SizedBox(
-      height: widget.height,
-      width: widget.width,
-
-      child: ElevatedButton(
-        onPressed: widget.onPressed,
-        style: ButtonStyle(
-          elevation: const WidgetStatePropertyAll(3),
-          shadowColor: const WidgetStatePropertyAll(Colors.black),
-          backgroundColor: WidgetStatePropertyAll<Color>(cor.laranja),
-          overlayColor: WidgetStatePropertyAll(cor.laranjaEscuro),
-          shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          ),
-        ),
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(widget.icon, color: Colors.white, size: 40),
-            const SizedBox(height: 8),
-            Text(
-              widget.txt,
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white, fontSize: 15),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: cor.laranjaEscuro,
+              offset: const Offset(0, 4),
+              blurRadius: 0,
             ),
           ],
+          borderRadius: BorderRadius.circular(10),
         ),
-      ),
+        child: ElevatedButton(
+          onPressed: widget.onPressed,
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll<Color>(cor.laranja),
+            overlayColor: WidgetStatePropertyAll(cor.laranjaEscuro),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(widget.icon, color: Colors.white, size: 40),
+              const SizedBox(height: 8),
+              Text(
+                widget.txt,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.white, fontSize: 15),
+              ),
+            ],
+          ),
+        ),
+      )
     );
   }
 }
