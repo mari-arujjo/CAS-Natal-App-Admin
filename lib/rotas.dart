@@ -1,7 +1,10 @@
 import 'package:cas_natal_app_admin/Admin/Gestao%20Users/gestao_users_page.dart';
 import 'package:cas_natal_app_admin/Admin/Gestao%20aula/gestao_aula_page.dart';
+import 'package:cas_natal_app_admin/Admin/Gestao%20curso/cadastro_curso_page.dart';
 import 'package:cas_natal_app_admin/Admin/Gestao%20curso/gestao_curso_page.dart';
 import 'package:cas_natal_app_admin/Admin/Gestao%20glossario/gestao_glossario_page.dart';
+import 'package:cas_natal_app_admin/Admin/Gestao%20users/cadastrar_user_page.dart';
+import 'package:cas_natal_app_admin/Admin/Gestao%20users/user_page.dart';
 import 'package:cas_natal_app_admin/Admin/admin_page.dart';
 import 'package:cas_natal_app_admin/Configuracoes/config_page.dart';
 import 'package:cas_natal_app_admin/Configuracoes/editar_perfil_page.dart';
@@ -60,6 +63,22 @@ class AppNavigation {
                     builder: (context, state) {
                       return GestaoUsersPage(key: state.pageKey);
                     },
+                    routes: [
+                      GoRoute(
+                        path: '/cadastroUser',
+                        name: 'CadastroUser',
+                        builder: (context, state) {
+                          return CadastrarUserPage(key: state.pageKey);
+                        },
+                      ),
+                      GoRoute(
+                        path: '/alterarUser',
+                        name: 'AlterarUser',
+                        builder: (context, state) {
+                          return UserPage(key: state.pageKey);
+                        },
+                      )
+                    ]
                   ),
                   GoRoute(
                     path: '/gestaoCurso',
@@ -67,6 +86,15 @@ class AppNavigation {
                     builder: (context, state) {
                       return GestaoCursoPage(key: state.pageKey);
                     },
+                    routes: [
+                      GoRoute(
+                        path: '/cadastroCurso',
+                        name: 'CadastroCurso',
+                        builder: (context, state) {
+                          return CadastroCursoPage(key: state.pageKey);
+                        },
+                      )
+                    ]
                   ),
                   GoRoute(
                     path: '/gestaoAula',

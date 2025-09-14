@@ -1,6 +1,6 @@
 import 'package:cas_natal_app_admin/cores.dart';
-import 'package:cas_natal_app_admin/widgets/botoes/bt_lista_widget.dart';
-import 'package:cas_natal_app_admin/widgets/botoes/flutuante_widget.dart';
+import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_lista_widget.dart';
+import 'package:cas_natal_app_admin/widgets/botoes_padrao/flutuante_widget.dart';
 import 'package:cas_natal_app_admin/widgets/vizualizacao/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -28,7 +28,7 @@ class _GestaoUsersPageState extends State<GestaoUsersPage> {
       ),
 
       floatingActionButton: BotaoFlutuanteWidget(
-        onPressed: () => context.goNamed('cadastroUsuarios'),
+        onPressed: () => context.goNamed('CadastroUser'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 
@@ -53,8 +53,10 @@ class _GestaoUsersPageState extends State<GestaoUsersPage> {
                 itemCount: 1,
                 itemBuilder: (_, index) {
                   return ButtonLista(
-                    txt: '@marujo - marujooo',
-                    onPressed: () {},
+                    txt: '@marujo - Mariana Araújo Silva',
+                    onPressed: () {
+                      context.goNamed('AlterarUser');
+                    },
                   );
                 },
               ),

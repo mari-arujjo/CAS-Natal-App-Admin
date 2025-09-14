@@ -1,25 +1,37 @@
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:flutter/material.dart';
 
-class InputPadraoWidget extends StatefulWidget {
-  final String? hintText;
+class InputSenhaWidget extends StatefulWidget {
+  final TextEditingController? controller;
   final int? maxLength;
-  const InputPadraoWidget({super.key, this.hintText, required this.maxLength});
+  const InputSenhaWidget({super.key, this.maxLength, this.controller});
 
   @override
-  State<InputPadraoWidget> createState() => _InputPadraoWidgetState();
+  State<InputSenhaWidget> createState() => _InputSenhaWidgetState();
 }
 
-class _InputPadraoWidgetState extends State<InputPadraoWidget> {
+class _InputSenhaWidgetState extends State<InputSenhaWidget> {
+  bool isObscured = true;
   final cores = Cores();
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller,
+      obscureText: isObscured,
       cursorColor: cores.azulEscuro,
       maxLength: widget.maxLength,
       decoration: InputDecoration(
-        hintText: widget.hintText,
+        suffixIcon: IconButton(
+          
+          icon: Icon(isObscured ? Icons.visibility_off : Icons.visibility),
+          onPressed: () {
+            setState(() {
+              isObscured = !isObscured;
+            });
+          },
+        ),
+
         hintStyle: TextStyle(color: cores.azulEscuro),
         filled: true,
         fillColor: Colors.white,

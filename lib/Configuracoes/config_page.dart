@@ -1,8 +1,8 @@
 
 import 'package:cas_natal_app_admin/cores.dart';
-import 'package:cas_natal_app_admin/widgets/botoes/bt_laranja_widget.dart';
+import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes/bt_menu_widget.dart';
-import 'package:cas_natal_app_admin/widgets/vizualizacao/foto.dart';
+import 'package:cas_natal_app_admin/widgets/vizualizacao/avatar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,7 +30,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(width: 15),
-                    FotoWidget(tam: 30),
+                    AvatarWidget(tam: 30),
                     SizedBox(width: 15),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

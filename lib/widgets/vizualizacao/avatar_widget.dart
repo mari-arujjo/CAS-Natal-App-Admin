@@ -1,15 +1,15 @@
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:flutter/material.dart';
 
-class FotoWidget extends StatefulWidget {
+class AvatarWidget extends StatefulWidget {
   final double tam;
-  const FotoWidget({super.key, required this.tam});
+  const AvatarWidget({super.key, required this.tam});
 
   @override
-  State<FotoWidget> createState() => _FotoWidgetState();
+  State<AvatarWidget> createState() => _AvatarWidgetState();
 }
 
-class _FotoWidgetState extends State<FotoWidget> {
+class _AvatarWidgetState extends State<AvatarWidget> {
   final cores = Cores();
   @override
   Widget build(BuildContext context) {

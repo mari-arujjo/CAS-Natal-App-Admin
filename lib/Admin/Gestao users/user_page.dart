@@ -2,18 +2,19 @@ import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/widgets/botoes/bt_icon_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';
 import 'package:cas_natal_app_admin/widgets/inputs/input_widget.dart';
-import 'package:cas_natal_app_admin/widgets/vizualizacao/container_widget.dart';
+import 'package:cas_natal_app_admin/widgets/listas/lista_role_widget.dart';
 import 'package:cas_natal_app_admin/widgets/vizualizacao/avatar_widget.dart';
+import 'package:cas_natal_app_admin/widgets/vizualizacao/container_widget.dart';
 import 'package:flutter/material.dart';
 
-class EditarPerfilPage extends StatefulWidget {
-  const EditarPerfilPage({super.key});
+class UserPage extends StatefulWidget {
+  const UserPage({super.key});
 
   @override
-  State<EditarPerfilPage> createState() => _EditarPerfilPageState();
+  State<UserPage> createState() => _UserPageState();
 }
 
-class _EditarPerfilPageState extends State<EditarPerfilPage> {
+class _UserPageState extends State<UserPage> {
   final cores = Cores();
 
   @override
@@ -59,6 +60,11 @@ class _EditarPerfilPageState extends State<EditarPerfilPage> {
                           maxLength: 150,
                           hintText: 'mariana.araujo@email.com',
                         ),
+
+                        Text('Role:', style: TextStyle(fontSize: 16)),
+                        SizedBox(height: 5),
+                        ListaRoleWidget(txt: '1 - Administrador'), 
+                        SizedBox(height: 20),
                       ],
                     ),
                   ),

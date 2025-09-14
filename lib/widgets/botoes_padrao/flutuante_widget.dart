@@ -19,7 +19,17 @@ class _FlutuanteState extends State<BotaoFlutuanteWidget> {
     return FloatingActionButton.extended(
       foregroundColor: Colors.white,
       backgroundColor: cor.laranja,
-      onPressed: () {},
+      onPressed: () {
+        setState(() {
+          pressed = true;
+        });
+        Future.delayed(const Duration(milliseconds: 100), () {
+          widget.onPressed();
+          setState(() {
+            pressed = false;
+          });
+        });
+      },
 
       label: const Text('Novo', style: TextStyle(fontWeight: FontWeight.bold),),
       icon: Icon(Icons.add),
