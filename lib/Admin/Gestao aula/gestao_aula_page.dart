@@ -1,7 +1,7 @@
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_lista_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/flutuante_widget.dart';
-import 'package:cas_natal_app_admin/widgets/vizualizacao/search_widget.dart';
+import 'package:cas_natal_app_admin/widgets/inputs/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,7 +28,7 @@ class _GestaoAulaPageState extends State<GestaoAulaPage> {
       ),
 
       floatingActionButton: BotaoFlutuanteWidget(
-        onPressed: () => context.goNamed('cadastroUsuarios'),
+        onPressed: () => context.goNamed('CadastroAula'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 
@@ -53,8 +53,10 @@ class _GestaoAulaPageState extends State<GestaoAulaPage> {
                 itemCount: 1,
                 itemBuilder: (_, index) {
                   return ButtonLista(
-                    txt: 'Aula 1: Origens da Comunidade Surda no Brasil',
-                    onPressed: () {},
+                    txt: 'Aula 1 - Origens da Comunidade Surda no Brasil',
+                    onPressed: () {
+                      context.goNamed('AlterarAula');
+                    },
                   );
                 },
               ),

@@ -46,7 +46,7 @@ class AdminPage extends StatelessWidget {
                 onPressed: () {
                   context.goNamed('GestaoGlossario');
                 },
-                icon: CupertinoIcons.book_solid,
+                icon: Icons.sign_language,
               ),
             ],
           ),

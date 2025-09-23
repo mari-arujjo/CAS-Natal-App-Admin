@@ -1,23 +1,24 @@
-import 'package:cas_natal_app_admin/widgets/botoes/bt_icon_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';
-import 'package:cas_natal_app_admin/widgets/fotos/foto_curso_widget.dart';
+import 'package:cas_natal_app_admin/widgets/fotos/foto_sinal_widget.dart';
 import 'package:cas_natal_app_admin/widgets/inputs/input_descricao_widget.dart';
 import 'package:cas_natal_app_admin/widgets/inputs/input_widget.dart';
+import 'package:cas_natal_app_admin/widgets/listas/lista_catsinal_widget.dart';
 import 'package:cas_natal_app_admin/widgets/vizualizacao/container_widget.dart';
+import 'package:cas_natal_app_admin/widgets/botoes/bt_icon_widget.dart';
 import 'package:flutter/material.dart';
 
-class CadastroCursoPage extends StatefulWidget {
-  const CadastroCursoPage({super.key});
+class CadastroGlossarioPage extends StatefulWidget {
+  const CadastroGlossarioPage({super.key});
 
   @override
-  State<CadastroCursoPage> createState() => _CadastroCursoPageState();
+  State<CadastroGlossarioPage> createState() => _CadastroGlossarioPageState();
 }
 
-class _CadastroCursoPageState extends State<CadastroCursoPage> {
+class _CadastroGlossarioPageState extends State<CadastroGlossarioPage> {
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      appBar: AppBar(title: Text('Cadastro de cursos')),
+    return Scaffold(
+      appBar: AppBar(title: Text('Cadastro de itens do glossário')),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 20),
@@ -31,23 +32,28 @@ class _CadastroCursoPageState extends State<CadastroCursoPage> {
                       Stack(
                         alignment: Alignment.bottomRight,
                         children: [
-                          FotoCursoWidget(height:100),
+                          FotoSinalWidget(height:100),
                           BotaoIconWidget(icon: Icon(Icons.edit)),
                         ],
                       ),
                       SizedBox(height:20),
-                      /// NOME
-                      Text('Nome:', style: TextStyle(fontSize: 16)),
+                      /// NOME DO SINAL
+                      Text('Nome do sinal:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
                       InputPadraoWidget(maxLength: 50),
-                      /// ABREVIAÇÃO
-                      Text('Abreviação:', style: TextStyle(fontSize: 16)),
-                      SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 3),
                       /// DESCRIÇÃO
                       Text('Descrição:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputDescricaoWidget(maxLength: 150),                        
+                      InputDescricaoWidget(maxLength: 150),     
+                      /// CATEGORIA
+                      Text('Categoria:', style: TextStyle(fontSize: 16)),
+                      SizedBox(height: 5),
+                      ListaCategoriaSinalWidget(txt: 'Selecione a categoria do sinal'), 
+                      SizedBox(height: 20),
+                      /// URL
+                      Text('URL Sinal:', style: TextStyle(fontSize: 16)),
+                      SizedBox(height: 5),
+                      InputPadraoWidget(maxLength: 50),                       
                     ],
                   ),
                 ),

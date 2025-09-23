@@ -1,4 +1,4 @@
-import 'package:cas_natal_app_admin/widgets/vizualizacao/card_estatistica_widget.dart';
+import 'package:cas_natal_app_admin/widgets/estatistica/card_estatistica_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

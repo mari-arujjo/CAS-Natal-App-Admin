@@ -1,7 +1,7 @@
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_lista_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/flutuante_widget.dart';
-import 'package:cas_natal_app_admin/widgets/vizualizacao/search_widget.dart';
+import 'package:cas_natal_app_admin/widgets/inputs/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -53,8 +53,10 @@ class _GestaoCursoPageState extends State<GestaoCursoPage> {
                 itemCount: 1,
                 itemBuilder: (_, index) {
                   return ButtonLista(
-                    txt: 'História e Cultura Surda - Este curso apresenta aspectos históricos, sociais e identitários',
-                    onPressed: () {},
+                    txt: 'HCS - História e Cultura Surda',
+                    onPressed: () {
+                      context.goNamed('AlterarCurso');
+                    },
                   );
                 },
               ),

@@ -6,18 +6,18 @@ import 'package:cas_natal_app_admin/widgets/inputs/input_widget.dart';
 import 'package:cas_natal_app_admin/widgets/vizualizacao/container_widget.dart';
 import 'package:flutter/material.dart';
 
-class CadastroCursoPage extends StatefulWidget {
-  const CadastroCursoPage({super.key});
+class CursoPage extends StatefulWidget {
+  const CursoPage({super.key});
 
   @override
-  State<CadastroCursoPage> createState() => _CadastroCursoPageState();
+  State<CursoPage> createState() => _CursoPageState();
 }
 
-class _CadastroCursoPageState extends State<CadastroCursoPage> {
+class _CursoPageState extends State<CursoPage> {
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      appBar: AppBar(title: Text('Cadastro de cursos')),
+    return Scaffold(
+      appBar: AppBar(title: Text('História e Cultura Surda')),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 20),
@@ -39,15 +39,11 @@ class _CadastroCursoPageState extends State<CadastroCursoPage> {
                       /// NOME
                       Text('Nome:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 50),
-                      /// ABREVIAÇÃO
-                      Text('Abreviação:', style: TextStyle(fontSize: 16)),
-                      SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 3),
+                      InputPadraoWidget(maxLength: 50, hintText: 'História e Cultura Surda'),
                       /// DESCRIÇÃO
                       Text('Descrição:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputDescricaoWidget(maxLength: 150),                        
+                      InputDescricaoWidget(hintText: 'Este curso apresenta aspectos históricos, sociais e identitários da comunidade surda, com foco na valorização da Libras como primeira língua e no reconhecimento da surdez como diferença, e não deficiência.', maxLength: 150),                        
                     ],
                   ),
                 ),

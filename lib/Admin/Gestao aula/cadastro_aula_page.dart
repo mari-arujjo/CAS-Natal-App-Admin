@@ -1,23 +1,21 @@
-import 'package:cas_natal_app_admin/widgets/botoes/bt_icon_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';
-import 'package:cas_natal_app_admin/widgets/fotos/foto_curso_widget.dart';
-import 'package:cas_natal_app_admin/widgets/inputs/input_descricao_widget.dart';
+import 'package:cas_natal_app_admin/widgets/inputs/input_content_widget.dart';
 import 'package:cas_natal_app_admin/widgets/inputs/input_widget.dart';
+import 'package:cas_natal_app_admin/widgets/listas/lista_curso_widget.dart';
 import 'package:cas_natal_app_admin/widgets/vizualizacao/container_widget.dart';
 import 'package:flutter/material.dart';
-
-class CadastroCursoPage extends StatefulWidget {
-  const CadastroCursoPage({super.key});
+class CadastroAulaPage extends StatefulWidget {
+  const CadastroAulaPage({super.key});
 
   @override
-  State<CadastroCursoPage> createState() => _CadastroCursoPageState();
+  State<CadastroAulaPage> createState() => _CadastroAulaPageState();
 }
 
-class _CadastroCursoPageState extends State<CadastroCursoPage> {
+class _CadastroAulaPageState extends State<CadastroAulaPage> {
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
-      appBar: AppBar(title: Text('Cadastro de cursos')),
+    return Scaffold(
+      appBar: AppBar(title: Text('Cadastro de aulas')),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 20),
@@ -28,26 +26,27 @@ class _CadastroCursoPageState extends State<CadastroCursoPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Stack(
-                        alignment: Alignment.bottomRight,
-                        children: [
-                          FotoCursoWidget(height:100),
-                          BotaoIconWidget(icon: Icon(Icons.edit)),
-                        ],
-                      ),
-                      SizedBox(height:20),
                       /// NOME
                       Text('Nome:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
                       InputPadraoWidget(maxLength: 50),
-                      /// ABREVIAÇÃO
-                      Text('Abreviação:', style: TextStyle(fontSize: 16)),
+                      /// CURSO
+                      Text('Curso:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 3),
-                      /// DESCRIÇÃO
-                      Text('Descrição:', style: TextStyle(fontSize: 16)),
+                      ListaCursoWidget(txt: 'Selecione o curso da aula'), 
+                      SizedBox(height: 20),
+                      /// GLOSSARIO
+                      Text('Sinais do glossário:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputDescricaoWidget(maxLength: 150),                        
+                      InputPadraoWidget(maxLength: 50),
+                      /// URL
+                      Text('URL Vídeo:', style: TextStyle(fontSize: 16)),
+                      SizedBox(height: 5),
+                      InputPadraoWidget(maxLength: 50),
+                      /// CONTEUDO ESCRITO
+                      Text('Conteúdo escrito:', style: TextStyle(fontSize: 16)),
+                      SizedBox(height: 5),
+                      InputContentWidget(maxLength: 500),                        
                     ],
                   ),
                 ),

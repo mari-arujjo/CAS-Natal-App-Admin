@@ -1,7 +1,7 @@
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_lista_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/flutuante_widget.dart';
-import 'package:cas_natal_app_admin/widgets/vizualizacao/search_widget.dart';
+import 'package:cas_natal_app_admin/widgets/inputs/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,7 +28,7 @@ class _GestaoGlossarioPageState extends State<GestaoGlossarioPage> {
       ),
 
       floatingActionButton: BotaoFlutuanteWidget(
-        onPressed: () => context.goNamed('cadastroUsuarios'),
+        onPressed: () => context.goNamed('CadastroGlossario'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
 
@@ -53,8 +53,10 @@ class _GestaoGlossarioPageState extends State<GestaoGlossarioPage> {
                 itemCount: 1,
                 itemBuilder: (_, index) {
                   return ButtonLista(
-                    txt: 'Obrigado - Sinal que expressa uma profunda',
-                    onPressed: () {},
+                    txt: 'Obrigado - Emoções e comunicação',
+                    onPressed: () {
+                      context.goNamed('AlterarGlossario');
+                    },
                   );
                 },
               ),

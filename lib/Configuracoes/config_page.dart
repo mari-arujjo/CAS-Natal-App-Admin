@@ -2,7 +2,7 @@
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes/bt_menu_widget.dart';
-import 'package:cas_natal_app_admin/widgets/vizualizacao/avatar_widget.dart';
+import 'package:cas_natal_app_admin/widgets/fotos/avatar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

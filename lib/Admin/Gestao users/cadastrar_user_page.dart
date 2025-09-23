@@ -4,7 +4,7 @@ import 'package:cas_natal_app_admin/widgets/inputs/input_senha_widget.dart';
 import 'package:cas_natal_app_admin/widgets/inputs/input_widget.dart';
 import 'package:cas_natal_app_admin/widgets/listas/lista_role_widget.dart';
 import 'package:cas_natal_app_admin/widgets/vizualizacao/container_widget.dart';
-import 'package:cas_natal_app_admin/widgets/vizualizacao/avatar_widget.dart';
+import 'package:cas_natal_app_admin/widgets/fotos/avatar_widget.dart';
 import 'package:flutter/material.dart';
 
 
