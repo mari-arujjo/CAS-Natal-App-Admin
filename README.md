@@ -1,3 +1,3 @@
-# cas_natal_app_admin
+# CAS Natal - APP ADMIN Flutter
 
-A new Flutter project.
+Aplicativo exclusivo para administradores, voltado para o cadastro e gerenciamento de cursos, aulas e glossários. Consome diretamente os serviços da CRUD da API.
