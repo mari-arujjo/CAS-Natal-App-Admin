@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'course_provider.dart';
+part of 'lesson_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -50,91 +50,91 @@ final class HttpClientProvider
 
 String _$httpClientHash() => r'd4a03ed2eaa7aff98bc929aaf5f3836914037efa';
 
-@ProviderFor(courseRepository)
-const courseRepositoryProvider = CourseRepositoryProvider._();
+@ProviderFor(lessonRepository)
+const lessonRepositoryProvider = LessonRepositoryProvider._();
 
-final class CourseRepositoryProvider
+final class LessonRepositoryProvider
     extends
         $FunctionalProvider<
-          CourseRepository,
-          CourseRepository,
-          CourseRepository
+          LessonRepository,
+          LessonRepository,
+          LessonRepository
         >
-    with $Provider<CourseRepository> {
-  const CourseRepositoryProvider._()
+    with $Provider<LessonRepository> {
+  const LessonRepositoryProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'courseRepositoryProvider',
+        name: r'lessonRepositoryProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$courseRepositoryHash();
+  String debugGetCreateSourceHash() => _$lessonRepositoryHash();
 
   @$internal
   @override
-  $ProviderElement<CourseRepository> $createElement($ProviderPointer pointer) =>
+  $ProviderElement<LessonRepository> $createElement($ProviderPointer pointer) =>
       $ProviderElement(pointer);
 
   @override
-  CourseRepository create(Ref ref) {
-    return courseRepository(ref);
+  LessonRepository create(Ref ref) {
+    return lessonRepository(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(CourseRepository value) {
+  Override overrideWithValue(LessonRepository value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<CourseRepository>(value),
+      providerOverride: $SyncValueProvider<LessonRepository>(value),
     );
   }
 }
 
-String _$courseRepositoryHash() => r'0f9b1d907dfec49c000b203fa7010685689a5def';
+String _$lessonRepositoryHash() => r'a00c547c77e54585a275d0a0692c437eec284c25';
 
-@ProviderFor(CourseNotifier)
-const courseProvider = CourseNotifierProvider._();
+@ProviderFor(LessonNotifier)
+const lessonProvider = LessonNotifierProvider._();
 
-final class CourseNotifierProvider
-    extends $AsyncNotifierProvider<CourseNotifier, List<CourseModel>> {
-  const CourseNotifierProvider._()
+final class LessonNotifierProvider
+    extends $AsyncNotifierProvider<LessonNotifier, List<LessonModel>> {
+  const LessonNotifierProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'courseProvider',
+        name: r'lessonProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$courseNotifierHash();
+  String debugGetCreateSourceHash() => _$lessonNotifierHash();
 
   @$internal
   @override
-  CourseNotifier create() => CourseNotifier();
+  LessonNotifier create() => LessonNotifier();
 }
 
-String _$courseNotifierHash() => r'a3636157e36f2ee18a712415b31456554c28ad76';
+String _$lessonNotifierHash() => r'3ce710613267d866033b269a0f9da9301820b11e';
 
-abstract class _$CourseNotifier extends $AsyncNotifier<List<CourseModel>> {
-  FutureOr<List<CourseModel>> build();
+abstract class _$LessonNotifier extends $AsyncNotifier<List<LessonModel>> {
+  FutureOr<List<LessonModel>> build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
     final ref =
-        this.ref as $Ref<AsyncValue<List<CourseModel>>, List<CourseModel>>;
+        this.ref as $Ref<AsyncValue<List<LessonModel>>, List<LessonModel>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<List<CourseModel>>, List<CourseModel>>,
-              AsyncValue<List<CourseModel>>,
+              AnyNotifier<AsyncValue<List<LessonModel>>, List<LessonModel>>,
+              AsyncValue<List<LessonModel>>,
               Object?,
               Object?
             >;

@@ -1,17 +1,26 @@
+import 'package:cas_natal_app_admin/providers/course_provider.dart';
 import 'package:cas_natal_app_admin/widgets/estatistica/card_estatistica_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EstatisticasPage extends StatefulWidget {
+class EstatisticasPage extends ConsumerStatefulWidget {
   const EstatisticasPage({super.key});
 
   @override
-  State<EstatisticasPage> createState() => _EstatisticasPageState();
+  ConsumerState<EstatisticasPage> createState() => _EstatisticasPageState();
 }
 
-class _EstatisticasPageState extends State<EstatisticasPage> {
+class _EstatisticasPageState extends ConsumerState<EstatisticasPage> {
   @override
   Widget build(BuildContext context) {
+    final courseState = ref.watch(courseProvider);
+    final String courseCount = courseState.when(
+      data: (courses) => courses.length.toString(),
+      loading: () => '...',
+      error: (err, stack) => '?',
+    );
+
     return Scaffold(
       appBar: AppBar(title: Text('Estatísticas')),
       body: Padding(
@@ -20,14 +29,14 @@ class _EstatisticasPageState extends State<EstatisticasPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CardEstatisticaWidget(
-              txt: 'Users cadastrados',
+              txt: 'Usuários cadastrados',
               dado: '?',
               ico: Icons.people
             ),
             SizedBox(height: 15),
             CardEstatisticaWidget(
               txt: 'Cursos cadastrados',
-              dado: '?',
+              dado: courseCount,
               ico: Icons.school,
             ),
             SizedBox(height: 15),

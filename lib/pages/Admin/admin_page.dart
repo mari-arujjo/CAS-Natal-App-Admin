@@ -20,6 +20,13 @@ class AdminPage extends StatelessWidget {
             mainAxisSpacing: 15,
             children: [
               ButtonQuadrado(
+                txt: 'Gestão de matrículas',
+                onPressed: () {
+                  context.goNamed('GestaoUsers');
+                },
+                icon: Icons.badge,
+              ),
+              ButtonQuadrado(
                 txt: 'Gestão de usuários',
                 onPressed: () {
                   context.goNamed('GestaoUsers');
@@ -34,14 +41,14 @@ class AdminPage extends StatelessWidget {
                 icon: Icons.school,
               ),
               ButtonQuadrado(
-                txt: 'Cadastrar aula',
+                txt: 'Gestão de aulas',
                 onPressed: () {
                   context.goNamed('GestaoAula');
                 },
                 icon: Icons.play_circle_fill,
               ),
               ButtonQuadrado(
-                txt: 'Cadastrar sinal no glossário',
+                txt: 'Gestão do glossário',
                 onPressed: () {
                   context.goNamed('GestaoGlossario');
                 },

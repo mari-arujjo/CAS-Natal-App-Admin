@@ -1,4 +1,5 @@
 import 'package:cas_natal_app_admin/API/entidades/course/course_model.dart';
+import 'package:cas_natal_app_admin/API/entidades/lesson/lesson_model.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20Users/gestao_users_page.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/aula_page.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/cadastro_aula_page.dart';
@@ -128,7 +129,8 @@ class AppNavigation {
                         path: '/alterarAula',
                         name: 'AlterarAula',
                         builder: (context, state) {
-                          return AulaPage(key: state.pageKey);
+                          final aula = state.extra as LessonModel;
+                          return AulaPage(key: state.pageKey, aula: aula);
                         },
                       ),
                     ]

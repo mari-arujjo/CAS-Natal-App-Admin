@@ -25,14 +25,15 @@ class GestaoCursoPage extends ConsumerWidget {
           child: SearchBarWidget(),
         ),
       ),
+
       floatingActionButton: BotaoFlutuanteWidget(
         onPressed: () => context.goNamed('CadastroCurso'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
       body: Center(
         child: Padding(
-          padding:
-              const EdgeInsets.only(top: 10, bottom: 20, left: 20, right: 20),
+          padding: const EdgeInsets.only(top: 10, bottom: 20, left: 20, right: 20),
           child: Container(
             margin: const EdgeInsets.only(top: 20),
             padding: const EdgeInsets.only(top: 5, bottom: 5),

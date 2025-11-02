@@ -18,7 +18,7 @@ class _CadastroAulaPageState extends State<CadastroAulaPage> {
       appBar: AppBar(title: Text('Cadastro de aulas')),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 20),
+          padding: EdgeInsets.only(left: 20, right: 20, bottom: 30, top: 20),
           child: Column(
             children: [
               ContainerWidget(
@@ -26,24 +26,24 @@ class _CadastroAulaPageState extends State<CadastroAulaPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      /// NOME
+                      ///
                       Text('Nome:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
                       InputPadraoWidget(maxLength: 50, readOnly: false),
-                      /// CURSO
+                      ///
                       Text('Curso:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
                       ListaCursoWidget(txt: 'Selecione o curso da aula'), 
                       SizedBox(height: 20),
-                      /// GLOSSARIO
+                      ///
                       Text('Sinais do glossário:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
                       InputPadraoWidget(maxLength: 50, readOnly: false),
-                      /// URL
+                      ///
                       Text('URL Vídeo:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
                       InputPadraoWidget(maxLength: 50, readOnly: false),
-                      /// CONTEUDO ESCRITO
+                      ///
                       Text('Conteúdo escrito:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
                       InputContentWidget(maxLength: 500),                        
@@ -51,7 +51,7 @@ class _CadastroAulaPageState extends State<CadastroAulaPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
