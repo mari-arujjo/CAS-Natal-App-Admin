@@ -29,7 +29,7 @@ class _CadastroAulaPageState extends State<CadastroAulaPage> {
                       /// NOME
                       Text('Nome:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 50),
+                      InputPadraoWidget(maxLength: 50, readOnly: false),
                       /// CURSO
                       Text('Curso:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
@@ -38,11 +38,11 @@ class _CadastroAulaPageState extends State<CadastroAulaPage> {
                       /// GLOSSARIO
                       Text('Sinais do glossário:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 50),
+                      InputPadraoWidget(maxLength: 50, readOnly: false),
                       /// URL
                       Text('URL Vídeo:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 50),
+                      InputPadraoWidget(maxLength: 50, readOnly: false),
                       /// CONTEUDO ESCRITO
                       Text('Conteúdo escrito:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),

@@ -27,14 +27,14 @@ class _RedefinirSenhaPageState extends State<RedefinirSenhaPage> {
                     children: [
                       Text('Nova senha:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 20),
+                      InputPadraoWidget(maxLength: 20, readOnly: false),
 
                       Text(
                         'Confirmar nova senha:',
                         style: TextStyle(fontSize: 16),
                       ),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 20),
+                      InputPadraoWidget(maxLength: 20, readOnly: false),
                     ],
                   ),
                 ),

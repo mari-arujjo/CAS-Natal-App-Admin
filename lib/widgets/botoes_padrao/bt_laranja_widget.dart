@@ -23,7 +23,7 @@ class _BotaoLaranjaWidgetState extends State<BotaoLaranjaWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 45,
+      height: 40,
       width: widget.tam,
       child: Container(
         decoration: BoxDecoration(

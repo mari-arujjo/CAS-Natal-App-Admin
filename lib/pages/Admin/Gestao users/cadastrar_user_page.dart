@@ -41,15 +41,15 @@ class _CadastrarUserPageState extends State<CadastrarUserPage> {
                       /// NOME
                       Text('Nome:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 50),
+                      InputPadraoWidget(maxLength: 50, readOnly: false),
                       /// USERNAME
                       Text('Usuário:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 20),
+                      InputPadraoWidget(maxLength: 20, readOnly: false),
                       /// EMAIL
                       Text('Email:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 100),  
+                      InputPadraoWidget(maxLength: 100, readOnly: false),  
                       /// ROLE
                       Text('Role:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),

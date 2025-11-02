@@ -19,6 +19,8 @@ class _FlutuanteState extends State<BotaoFlutuanteWidget> {
     return FloatingActionButton.extended(
       foregroundColor: Colors.white,
       backgroundColor: cor.laranja,
+      elevation: 2,
+
       onPressed: () {
         setState(() {
           pressed = true;

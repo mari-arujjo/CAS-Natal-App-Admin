@@ -25,8 +25,8 @@ class _CardEstatisticaWidgetState extends State<CardEstatisticaWidget> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Container(
-          height: 80,
-          width: constraints.maxWidth, // pega a largura disponível do grid
+          height: 90,
+          width: constraints.maxWidth, 
           padding: const EdgeInsets.only(
             top: 15,
             bottom: 15,

@@ -1,20 +1,21 @@
-import 'package:cas_natal_app_admin/Admin/Gestao%20Users/gestao_users_page.dart';
-import 'package:cas_natal_app_admin/Admin/Gestao%20aula/aula_page.dart';
-import 'package:cas_natal_app_admin/Admin/Gestao%20aula/cadastro_aula_page.dart';
-import 'package:cas_natal_app_admin/Admin/Gestao%20aula/gestao_aula_page.dart';
-import 'package:cas_natal_app_admin/Admin/Gestao%20curso/cadastro_curso_page.dart';
-import 'package:cas_natal_app_admin/Admin/Gestao%20curso/curso_page.dart';
-import 'package:cas_natal_app_admin/Admin/Gestao%20curso/gestao_curso_page.dart';
-import 'package:cas_natal_app_admin/Admin/Gestao%20glossario/cadastro_glossario_page.dart';
-import 'package:cas_natal_app_admin/Admin/Gestao%20glossario/gestao_glossario_page.dart';
-import 'package:cas_natal_app_admin/Admin/Gestao%20glossario/glossario_page.dart';
-import 'package:cas_natal_app_admin/Admin/Gestao%20users/cadastrar_user_page.dart';
-import 'package:cas_natal_app_admin/Admin/Gestao%20users/user_page.dart';
-import 'package:cas_natal_app_admin/Admin/admin_page.dart';
-import 'package:cas_natal_app_admin/Configuracoes/config_page.dart';
-import 'package:cas_natal_app_admin/Configuracoes/editar_perfil_page.dart';
-import 'package:cas_natal_app_admin/Configuracoes/senha_page.dart';
-import 'package:cas_natal_app_admin/Estatisticas/estatistica_page.dart';
+import 'package:cas_natal_app_admin/API/entidades/course/course_model.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20Users/gestao_users_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/aula_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/cadastro_aula_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/gestao_aula_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20curso/cadastro_curso_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20curso/curso_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20curso/gestao_curso_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20glossario/cadastro_glossario_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20glossario/gestao_glossario_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20glossario/glossario_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20users/cadastrar_user_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/Gestao%20users/user_page.dart';
+import 'package:cas_natal_app_admin/pages/Admin/admin_page.dart';
+import 'package:cas_natal_app_admin/pages/Configuracoes/config_page.dart';
+import 'package:cas_natal_app_admin/pages/Configuracoes/editar_perfil_page.dart';
+import 'package:cas_natal_app_admin/pages/Configuracoes/senha_page.dart';
+import 'package:cas_natal_app_admin/pages/Estatisticas/estatistica_page.dart';
 import 'package:cas_natal_app_admin/nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
@@ -103,7 +104,8 @@ class AppNavigation {
                         path: '/alterarCurso',
                         name: 'AlterarCurso',
                         builder: (context, state) {
-                          return CursoPage(key: state.pageKey);
+                          final curso = state.extra as CourseModel;
+                          return CursoPage(key: state.pageKey, curso: curso);
                         },
                       ),
                     ]

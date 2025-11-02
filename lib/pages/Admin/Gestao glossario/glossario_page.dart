@@ -40,7 +40,7 @@ class _GlossarioPageState extends State<GlossarioPage> {
                       /// NOME DO SINAL
                       Text('Nome do sinal:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 50),
+                      InputPadraoWidget(maxLength: 50, readOnly: false),
                       /// DESCRIÇÃO
                       Text('Descrição:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
@@ -53,7 +53,7 @@ class _GlossarioPageState extends State<GlossarioPage> {
                       /// URL
                       Text('URL Sinal:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      InputPadraoWidget(maxLength: 50),                       
+                      InputPadraoWidget(maxLength: 50, readOnly: false),                       
                     ],
                   ),
                 ),
