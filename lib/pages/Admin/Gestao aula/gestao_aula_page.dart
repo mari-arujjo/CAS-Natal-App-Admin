@@ -1,5 +1,5 @@
 import 'package:cas_natal_app_admin/cores.dart';
-import 'package:cas_natal_app_admin/providers/lesson_provider.dart';
+import 'package:cas_natal_app_admin/API/providers/lesson_provider.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_lista_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/flutuante_widget.dart';
 import 'package:cas_natal_app_admin/widgets/inputs/search_widget.dart';
@@ -72,7 +72,7 @@ class GestaoAulaPage extends ConsumerWidget {
                       return ButtonLista(
                         txt: '${lesson.lessonCode} - ${lesson.name}',
                         onPressed: () {
-                          context.goNamed('AlterarAula');
+                          context.goNamed('AlterarAula', extra: lesson);
                         },
                       );
                     },

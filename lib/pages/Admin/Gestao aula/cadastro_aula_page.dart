@@ -33,7 +33,7 @@ class _CadastroAulaPageState extends State<CadastroAulaPage> {
                       ///
                       Text('Curso:', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 5),
-                      ListaCursoWidget(txt: 'Selecione o curso da aula'), 
+                      ListaCursoWidget(), 
                       SizedBox(height: 20),
                       ///
                       Text('Sinais do glossário:', style: TextStyle(fontSize: 16)),

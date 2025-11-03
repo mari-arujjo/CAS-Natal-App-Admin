@@ -1,6 +1,6 @@
 import 'package:cas_natal_app_admin/API/entidades/course/course_model.dart';
 import 'package:cas_natal_app_admin/popup.dart';
-import 'package:cas_natal_app_admin/providers/course_provider.dart';
+import 'package:cas_natal_app_admin/API/providers/course_provider.dart';
 import 'package:cas_natal_app_admin/widgets/botoes/bt_icon_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';
 import 'package:cas_natal_app_admin/widgets/fotos/foto_curso_widget.dart';
