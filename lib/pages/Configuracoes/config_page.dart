@@ -76,7 +76,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
 
                 SizedBox(height: 5),
                 BotaoMenuWidget(
-                  onPressed: () {},
+                  onPressed: () {context.goNamed('Login');},
                   txt: 'Sair',
                   tam: 360,
                   iconInicio: Icons.logout,
