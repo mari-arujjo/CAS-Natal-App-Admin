@@ -18,7 +18,7 @@ import 'package:cas_natal_app_admin/pages/Configuracoes/editar_perfil_page.dart'
 import 'package:cas_natal_app_admin/pages/Configuracoes/senha_page.dart';
 import 'package:cas_natal_app_admin/pages/Estatisticas/estatistica_page.dart';
 import 'package:cas_natal_app_admin/nav.dart';
-import 'package:cas_natal_app_admin/pages/login_page.dart';
+import 'package:cas_natal_app_admin/pages/login_cadastro_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 

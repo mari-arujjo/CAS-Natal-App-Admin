@@ -37,9 +37,12 @@ class _Input4State extends State<InputOutlineSenha> {
 
         filled: true,
         fillColor: Colors.white,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-
-        focusedBorder: OutlineInputBorder(
+        border: UnderlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        //enabledBorder: OutlineInputBorder(
+          //borderRadius: BorderRadius.circular(10),
+          //borderSide: BorderSide(color: cor.azulEscuro),
+        //),
+        focusedBorder: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: cor.azulEscuro),
         ),

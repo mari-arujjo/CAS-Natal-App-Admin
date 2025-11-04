@@ -1,20 +1,20 @@
 class AppUserModel{
-  final String id;
+  final String? id;
   final String fullName;
   final String userName;
   final String email;
   final String? password;
   final String? phoneNumber;
-  final String token;
+  final String? token;
 
   AppUserModel({
-    required this.id,
+    this.id,
     required this.fullName,
     required this.userName,
     required this.email,
     this.password,
     this.phoneNumber,
-    required this.token
+    this.token
   });
 
   factory AppUserModel.fromMap(Map<String, dynamic> map){

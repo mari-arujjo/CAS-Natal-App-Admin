@@ -25,14 +25,19 @@ class _Input2State extends State<InputOutline> {
     return TextFormField(
       controller: widget.controller,
       cursorColor: cor.azulEscuro,
+      
       decoration: InputDecoration(
         labelText: widget.txt,
         labelStyle: TextStyle(color: cor.azulEscuro),
         prefixIcon: widget.ico,
         filled: true,
-        fillColor: Colors.transparent,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-        focusedBorder: OutlineInputBorder(
+        fillColor: Colors.white,
+        border: UnderlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        //enabledBorder: OutlineInputBorder(
+          //borderRadius: BorderRadius.circular(10),
+          //borderSide: BorderSide(color: cor.gray),
+        //),
+        focusedBorder: UnderlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(color: cor.azulEscuro),
         ),

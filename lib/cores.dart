@@ -11,4 +11,6 @@ class Cores {
 
   final cinzaClaro = const Color(0xFFEDEDED);
   final preto = const Color(0xFF1D1B20);
+  final gray = const Color(0xFF818181);
+
 }

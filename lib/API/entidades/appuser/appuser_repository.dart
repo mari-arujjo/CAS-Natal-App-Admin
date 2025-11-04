@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cas_natal_app_admin/API/entidades/appuser/appuser_model.dart';
 import 'package:cas_natal_app_admin/API/http_client.dart';
 
@@ -17,11 +16,18 @@ class AppUserRepository {
     }
   }
 
-  Future<AppUserModel> register(AppUserModel user) async {
+  Future<AppUserModel> register({required String fullName, required String userName, required String email, required String password}) async {
+    final Map<String, dynamic> requestBody ={
+      'fullName': fullName,
+      'username': userName,
+      'email': email,
+      'passwordHash': password,
+    };
+
     final response = await client.post(
       url: 'https://cas-natal-api.onrender.com/CASNatal/account/register',
       headers: {'Content-type': 'application/json'},
-      body: jsonEncode(user.toMap()),
+      body: jsonEncode(requestBody),
     );
 
     if (response.statusCode != 200 && response.statusCode != 201){
@@ -43,13 +49,18 @@ class AppUserRepository {
     }
   }
 
-  Future<AppUserModel> login(AppUserModel user) async {
+  Future<AppUserModel> login({ required String userName, required String password}) async {
+    final Map<String, dynamic> requestBody ={
+      'username': userName,
+      'passwordHash': password,
+    };
+
     final response = await client.post(
       url: 'https://cas-natal-api.onrender.com/CASNatal/account/login',
       headers: {'Content-type': 'application/json'},
-      body: jsonEncode(user.toMap()),
+      body: jsonEncode(requestBody),
     );
-    if (response.statusCode != 200 && response.statusCode != 201){
+    if (response.statusCode == 401){
       final body = jsonDecode(response.body);
       if (body['errors'] != null){
         final erro = body['errors'] as Map<String, dynamic>;

@@ -11,10 +11,10 @@ void main() {
   );
 }
 
-class AppWidget extends StatelessWidget {
+class AppWidget extends ConsumerWidget {
   const AppWidget({super.key});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final cores = Cores();
     return MaterialApp.router(
       title: 'CAS Natal + IFRN ADMIN',
