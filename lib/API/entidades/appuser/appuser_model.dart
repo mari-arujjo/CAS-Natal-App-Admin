@@ -1,4 +1,4 @@
-class AppUserModel{
+class AppUserModel {
   final String? id;
   final String fullName;
   final String userName;
@@ -14,23 +14,23 @@ class AppUserModel{
     required this.email,
     this.password,
     this.phoneNumber,
-    this.token
+    this.token,
   });
 
-  factory AppUserModel.fromMap(Map<String, dynamic> map){
+  factory AppUserModel.fromMap(Map<String, dynamic> map) {
     return AppUserModel(
-      id: map['id']??'', 
-      fullName: map['fullName']??'', 
-      userName: map['userName']??'', 
-      email: map['email']??'', 
-      password: map['passwordHash']??'', 
-      phoneNumber: map['phoneNumber']??'', 
-      token: map['token']??'',
+      id: map['id'],
+      fullName: map['name'] ?? map['fullName'] ?? '',
+      userName: map['username'] ?? map['userName'] ?? '',
+      email: map['email'] ?? '',
+      password: map['passwordHash'],
+      phoneNumber: map['phoneNumber'],
+      token: map['token']
     );
   }
 
-  Map<String, dynamic> toMap(){
-    return{
+  Map<String, dynamic> toMap() {
+    return {
       'id': id,
       'fullName': fullName,
       'username': userName,

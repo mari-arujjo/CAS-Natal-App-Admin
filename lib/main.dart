@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cas_natal_app_admin/cores.dart';
-import 'package:cas_natal_app_admin/rotas.dart';
+import 'package:cas_natal_app_admin/rotas.dart'; // Importa o NOVO provider de rotas
 
-void main() {
+Future<void> main() async {
+  // Garante que o Flutter esteja inicializado
+  WidgetsFlutterBinding.ensureInitialized();
+  
   runApp(
     const ProviderScope(
+      // Não precisamos mais do 'overrides'
       child: AppWidget()
     )
   );
@@ -16,6 +20,10 @@ class AppWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cores = Cores();
+
+    // Assista ao goRouterProvider
+    final router = ref.watch(goRouterProvider); 
+
     return MaterialApp.router(
       title: 'CAS Natal + IFRN ADMIN',
       debugShowCheckedModeBanner: false,
@@ -39,7 +47,8 @@ class AppWidget extends ConsumerWidget {
           bodySmall: TextStyle(color: cores.preto),
         ),
       ),
-      routerConfig: AppNavigation.rotas,
+      // Use o provider no routerConfig
+      routerConfig: router,
     );
   }
 }

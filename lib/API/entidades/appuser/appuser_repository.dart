@@ -18,10 +18,10 @@ class AppUserRepository {
 
   Future<AppUserModel> register({required String fullName, required String userName, required String email, required String password}) async {
     final Map<String, dynamic> requestBody ={
-      'fullName': fullName,
+      'Name': fullName,
       'username': userName,
       'email': email,
-      'passwordHash': password,
+      'password': password,
     };
 
     final response = await client.post(
@@ -52,7 +52,7 @@ class AppUserRepository {
   Future<AppUserModel> login({ required String userName, required String password}) async {
     final Map<String, dynamic> requestBody ={
       'username': userName,
-      'passwordHash': password,
+      'password': password,
     };
 
     final response = await client.post(

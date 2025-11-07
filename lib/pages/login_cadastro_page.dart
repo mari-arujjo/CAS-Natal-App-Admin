@@ -1,3 +1,4 @@
+import 'package:cas_natal_app_admin/API/entidades/appuser/appuser_model.dart';
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/popup.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';
@@ -6,6 +7,8 @@ import 'package:cas_natal_app_admin/widgets/inputs/ipt_senha_outline_widget.dart
 import 'package:cas_natal_app_admin/widgets/vizualizacao/container_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cas_natal_app_admin/API/providers/auth_providers.dart';
+import 'package:go_router/go_router.dart'; // <-- IMPORTAR GO_ROUTER
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -29,6 +32,30 @@ class _LoginState extends ConsumerState<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final cor = Cores();
+
+    ref.listen<AsyncValue<AppUserModel?>>(authControllerProvider, (previous, next) {
+      if (next.isLoading) {
+        popUp.PopUpAlert(context, ''); // Mostra o loading
+      }
+      
+      if (next.hasError) {
+        Navigator.pop(context); // Fecha o pop-up de loading
+        popUp.PopUpAlert(context, next.error.toString()); // Mostra o erro
+      }
+      
+      if (next.hasValue && next.value != null) {
+        Navigator.pop(context); // Fecha o pop-up de loading
+        
+        final user = next.value; 
+        print('--- LOGIN REALIZADO COM SUCESSO ---');
+        print('Usuário: ${user?.userName}');
+        print('Token: ${user?.token}');
+        print('-------------------------------------');
+
+        // NAVEGA PARA A HOME
+        context.go('/admin');
+      }
+    });
 
     return DefaultTabController(
       length: 2,
@@ -68,6 +95,10 @@ class _LoginState extends ConsumerState<LoginPage> {
   }
 
   Widget _buildLoginForm(Cores cor) {
+    // Assiste ao estado para desabilitar o botão
+    final authState = ref.watch(authControllerProvider);
+    final isLoading = authState.isLoading;
+
     return SingleChildScrollView(
       child: Padding(
         padding:
@@ -101,7 +132,17 @@ class _LoginState extends ConsumerState<LoginPage> {
             SizedBox(height: 20),
             BotaoLaranjaWidget(
               txt: 'Entrar',
-                onPressed: () async {},
+              // Desabilita o botão se estiver carregando
+              onPressed: () async { 
+                  final username = usernameLoginCtrl.text;
+                  final password = passwordLoginCtrl.text;
+
+                  if(username.isEmpty || password.isEmpty) {
+                    popUp.PopUpAlert(context, "Preencha usuário e senha.");
+                    return;
+                  }
+                  ref.read(authControllerProvider.notifier).login(username, password);
+              },
               tam: 1000,
             ),
           ],
@@ -111,6 +152,10 @@ class _LoginState extends ConsumerState<LoginPage> {
   }
 
   Widget _buildRegisterForm(Cores cor) {
+    // Assiste ao estado para desabilitar o botão
+    final authState = ref.watch(authControllerProvider);
+    final isLoading = authState.isLoading;
+
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -159,7 +204,31 @@ class _LoginState extends ConsumerState<LoginPage> {
             SizedBox(height: 20),
             BotaoLaranjaWidget(
               txt: 'Cadastrar',
-                onPressed: () async {},
+              // Desabilita o botão se estiver carregando
+              onPressed: () async {
+                  final name = nameCadastroCtrl.text;
+                  final username = usernameCadastroCtrl.text;
+                  final email = emailCadastroCtrl.text;
+                  final pass1 = passwordCadastroCtrl.text;
+                  final pass2 = password2CadastroCtrl.text;
+
+                  if (pass1 != pass2) {
+                    popUp.PopUpAlert(context, "As senhas não conferem.");
+                    return;
+                  }
+                  
+                  if(name.isEmpty || username.isEmpty || email.isEmpty || pass1.isEmpty) {
+                    popUp.PopUpAlert(context, "Preencha todos os campos.");
+                    return;
+                  }
+
+                  ref.read(authControllerProvider.notifier).register(
+                    fullName: name,
+                    userName: username,
+                    email: email,
+                    password: pass1,
+                  );
+                },
               tam: 1000,
             ),
           ],
