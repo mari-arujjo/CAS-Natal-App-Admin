@@ -32,6 +32,7 @@ flutter:
     - assets/logo_cas.png
     - assets/logo_cas_admin.png
     - assets/logo_cas_transparente.png
+    - assets/offline.png
 
     - assets/avatar/menina.png
     - assets/avatar/menino.png

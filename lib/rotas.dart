@@ -1,6 +1,6 @@
 import 'package:cas_natal_app_admin/API/entidades/course/course_model.dart';
 import 'package:cas_natal_app_admin/API/entidades/lesson/lesson_model.dart';
-import 'package:cas_natal_app_admin/API/providers/auth_providers.dart'; // <-- IMPORTAR
+import 'package:cas_natal_app_admin/API/providers/auth_provider.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20Users/gestao_users_page.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/aula_page.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/cadastro_aula_page.dart';
@@ -21,62 +21,42 @@ import 'package:cas_natal_app_admin/pages/Estatisticas/estatistica_page.dart';
 import 'package:cas_natal_app_admin/nav.dart';
 import 'package:cas_natal_app_admin/pages/login_cadastro_page.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // <-- IMPORTAR
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-// Defina as chaves de navegação globalmente
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _rootNavigatorGestao = GlobalKey<NavigatorState>(debugLabel: 'shellGestao');
 final _rootNavigatorEstatistica = GlobalKey<NavigatorState>(debugLabel: 'shellEstatistica');
 final _rootNavigatorConfiguracoes = GlobalKey<NavigatorState>(debugLabel: 'shellConfiguracoes');
 
-// Crie o Provider para o GoRouter
 final goRouterProvider = Provider<GoRouter>((ref) {
   
-  // Assista ao estado de autenticação
   final authState = ref.watch(authControllerProvider);
 
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: '/admin', // Sua home inicial
+    initialLocation: '/admin',
     navigatorKey: _rootNavigatorKey,
 
-    // LÓGICA DE REDIRECT
     redirect: (BuildContext context, GoRouterState state) {
-      
-      // Se está carregando o estado de auth (lendo o secure storage), não faça nada
-      if (authState.isLoading) {
-        return null; // Mostra uma tela de splash (se houver) ou branca
-      }
-
-      // Verifica se o usuário está logado
-      final isLoggedIn = authState.hasValue && authState.value != null;
-
-      // A rota que o usuário está tentando acessar
+      /*final isLoggedIn = authState.hasValue && authState.value != null;
       final isGoingToLogin = state.matchedLocation == '/login';
-
-      // Se NÃO está logado E NÃO está indo para a tela de login -> redireciona para /login
       if (!isLoggedIn && !isGoingToLogin) {
         return '/login';
       }
-
-      // Se ESTÁ logado E ESTÁ indo para a tela de login -> redireciona para /admin (home)
       if (isLoggedIn && isGoingToLogin) {
         return '/admin';
       }
-
-      // Em todos os outros casos, permite a navegação
-      return null;
+      */return null;
     },
 
     routes: <RouteBase>[
-      // (COLE SUAS ROTAS ORIGINAIS AQUI)
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return NavigationBarWidget(navigationShell: navigationShell);
         },
         branches: <StatefulShellBranch>[
-          ////////////// BRANCH -> GESTAO
+          // BRANCH -> GESTAO
           StatefulShellBranch(
             navigatorKey: _rootNavigatorGestao,
             routes: [
@@ -88,21 +68,21 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 },
                 routes: [
                   GoRoute(
-                    path: 'gestaoUsers', // Caminho relativo
+                    path: 'gestaoUsers',
                     name: 'GestaoUsers',
                     builder: (context, state) {
                       return GestaoUsersPage(key: state.pageKey);
                     },
                     routes: [
                       GoRoute(
-                        path: 'cadastroUser', // Caminho relativo
+                        path: 'cadastroUser',
                         name: 'CadastroUser',
                         builder: (context, state) {
                           return CadastrarUserPage(key: state.pageKey);
                         },
                       ),
                       GoRoute(
-                        path: 'alterarUser', // Caminho relativo
+                        path: 'alterarUser',
                         name: 'AlterarUser',
                         builder: (context, state) {
                           return UserPage(key: state.pageKey);
@@ -111,21 +91,21 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                     ]
                   ),
                   GoRoute(
-                    path: 'gestaoCurso', // Caminho relativo
+                    path: 'gestaoCurso',
                     name: 'GestaoCurso',
                     builder: (context, state) {
                       return GestaoCursoPage(key: state.pageKey);
                     },
                     routes: [
                       GoRoute(
-                        path: 'cadastroCurso', // Caminho relativo
+                        path: 'cadastroCurso',
                         name: 'CadastroCurso',
                         builder: (context, state) {
                           return CadastroCursoPage(key: state.pageKey);
                         },
                       ),
                       GoRoute(
-                        path: 'alterarCurso', // Caminho relativo
+                        path: 'alterarCurso',
                         name: 'AlterarCurso',
                         builder: (context, state) {
                           final curso = state.extra as CourseModel;
@@ -135,21 +115,21 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                     ]
                   ),
                   GoRoute(
-                    path: 'gestaoAula', // Caminho relativo
+                    path: 'gestaoAula',
                     name: 'GestaoAula',
                     builder: (context, state) {
                       return GestaoAulaPage(key: state.pageKey);
                     },
                     routes: [
                       GoRoute(
-                        path: 'cadastroAula', // Caminho relativo
+                        path: 'cadastroAula',
                         name: 'CadastroAula',
                         builder: (context, state) {
                           return CadastroAulaPage(key: state.pageKey);
                         },
                       ),
                       GoRoute(
-                        path: 'alterarAula', // Caminho relativo
+                        path: 'alterarAula',
                         name: 'AlterarAula',
                         builder: (context, state) {
                           final aula = state.extra as LessonModel;
@@ -159,21 +139,21 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                     ]
                   ),
                   GoRoute(
-                    path: 'gestaoGlossario', // Caminho relativo
+                    path: 'gestaoGlossario',
                     name: 'GestaoGlossario',
                     builder: (context, state) {
                       return GestaoGlossarioPage(key: state.pageKey);
                     },
                     routes: [
                       GoRoute(
-                        path: 'cadastroGlossario', // Caminho relativo
+                        path: 'cadastroGlossario',
                         name: 'CadastroGlossario',
                         builder: (context, state) {
                           return CadastroGlossarioPage(key: state.pageKey);
                         },
                       ),
                       GoRoute(
-                        path: 'alterarGlossario', // Caminho relativo
+                        path: 'alterarGlossario',
                         name: 'AlterarGlossario',
                         builder: (context, state) {
                           return GlossarioPage(key: state.pageKey);
@@ -186,7 +166,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
 
-          ////////////// BRANCH -> ESTATISTICA
+          // BRANCH -> ESTATISTICA
           StatefulShellBranch(
             navigatorKey: _rootNavigatorEstatistica,
             routes: [
@@ -200,7 +180,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
 
-          ////////////// BRANCH -> CONFIGURAÇÕES
+          // BRANCH -> CONFIGURAÇÕES
           StatefulShellBranch(
             navigatorKey: _rootNavigatorConfiguracoes,
             routes: [
@@ -212,14 +192,14 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 },
                 routes: [
                   GoRoute(
-                    path: 'editarPerfil', // Caminho relativo
+                    path: 'editarPerfil',
                     name: 'EditarPerfil',
                     builder: (context, state) {
                       return EditarPerfilPage(key: state.pageKey);
                     },
                   ),
                   GoRoute(
-                    path: 'redefinirSenha', // Caminho relativo
+                    path: 'redefinirSenha',
                     name: 'RedefinirSenha',
                     builder: (context, state) {
                       return RedefinirSenhaPage(key: state.pageKey);
@@ -232,12 +212,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         ],
       ),
 
-      // ROTA DE LOGIN (fora do shell)
       GoRoute(
-        path: '/login',
-        name: 'Login',
+        path: '/loginRegister',
+        name: 'LoginRegister',
         builder: (context, state) {
-          return LoginPage(key: state.pageKey);
+          return LoginRegisterPage(key: state.pageKey);
         },
       )
     ],

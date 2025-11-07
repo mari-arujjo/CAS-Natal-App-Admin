@@ -7,17 +7,17 @@ import 'package:cas_natal_app_admin/widgets/inputs/ipt_senha_outline_widget.dart
 import 'package:cas_natal_app_admin/widgets/vizualizacao/container_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cas_natal_app_admin/API/providers/auth_providers.dart';
-import 'package:go_router/go_router.dart'; // <-- IMPORTAR GO_ROUTER
+import 'package:cas_natal_app_admin/API/providers/auth_provider.dart';
+import 'package:go_router/go_router.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({super.key});
+class LoginRegisterPage extends ConsumerStatefulWidget {
+  const LoginRegisterPage({super.key});
 
   @override
-  ConsumerState<LoginPage> createState() => _LoginState();
+  ConsumerState<LoginRegisterPage> createState() => _LoginState();
 }
 
-class _LoginState extends ConsumerState<LoginPage> {
+class _LoginState extends ConsumerState<LoginRegisterPage> {
   final TextEditingController usernameLoginCtrl = TextEditingController();
   final TextEditingController passwordLoginCtrl = TextEditingController();
 
@@ -35,24 +35,21 @@ class _LoginState extends ConsumerState<LoginPage> {
 
     ref.listen<AsyncValue<AppUserModel?>>(authControllerProvider, (previous, next) {
       if (next.isLoading) {
-        popUp.PopUpAlert(context, ''); // Mostra o loading
+        popUp.PopUpAlert(context, '');
       }
       
       if (next.hasError) {
-        Navigator.pop(context); // Fecha o pop-up de loading
-        popUp.PopUpAlert(context, next.error.toString()); // Mostra o erro
+        //Navigator.pop(context);
+        popUp.PopUpAlert(context, next.error.toString());
       }
       
       if (next.hasValue && next.value != null) {
-        Navigator.pop(context); // Fecha o pop-up de loading
-        
+        //Navigator.pop(context);
         final user = next.value; 
         print('--- LOGIN REALIZADO COM SUCESSO ---');
         print('Usuário: ${user?.userName}');
         print('Token: ${user?.token}');
         print('-------------------------------------');
-
-        // NAVEGA PARA A HOME
         context.go('/admin');
       }
     });
@@ -95,10 +92,6 @@ class _LoginState extends ConsumerState<LoginPage> {
   }
 
   Widget _buildLoginForm(Cores cor) {
-    // Assiste ao estado para desabilitar o botão
-    final authState = ref.watch(authControllerProvider);
-    final isLoading = authState.isLoading;
-
     return SingleChildScrollView(
       child: Padding(
         padding:
@@ -132,16 +125,18 @@ class _LoginState extends ConsumerState<LoginPage> {
             SizedBox(height: 20),
             BotaoLaranjaWidget(
               txt: 'Entrar',
-              // Desabilita o botão se estiver carregando
               onPressed: () async { 
                   final username = usernameLoginCtrl.text;
                   final password = passwordLoginCtrl.text;
-
                   if(username.isEmpty || password.isEmpty) {
                     popUp.PopUpAlert(context, "Preencha usuário e senha.");
                     return;
                   }
-                  ref.read(authControllerProvider.notifier).login(username, password);
+                  try {
+                    ref.read(authControllerProvider.notifier).login(username, password);
+                  } catch(e){
+                    popUp.PopUpAlert(context, e);
+                  }
               },
               tam: 1000,
             ),
@@ -152,10 +147,6 @@ class _LoginState extends ConsumerState<LoginPage> {
   }
 
   Widget _buildRegisterForm(Cores cor) {
-    // Assiste ao estado para desabilitar o botão
-    final authState = ref.watch(authControllerProvider);
-    final isLoading = authState.isLoading;
-
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -204,7 +195,6 @@ class _LoginState extends ConsumerState<LoginPage> {
             SizedBox(height: 20),
             BotaoLaranjaWidget(
               txt: 'Cadastrar',
-              // Desabilita o botão se estiver carregando
               onPressed: () async {
                   final name = nameCadastroCtrl.text;
                   final username = usernameCadastroCtrl.text;

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cas_natal_app_admin/cores.dart';
-import 'package:cas_natal_app_admin/rotas.dart'; // Importa o NOVO provider de rotas
+import 'package:cas_natal_app_admin/rotas.dart';
 
 Future<void> main() async {
-  // Garante que o Flutter esteja inicializado
   WidgetsFlutterBinding.ensureInitialized();
   
   runApp(
     const ProviderScope(
-      // Não precisamos mais do 'overrides'
       child: AppWidget()
     )
   );
@@ -21,7 +19,6 @@ class AppWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cores = Cores();
 
-    // Assista ao goRouterProvider
     final router = ref.watch(goRouterProvider); 
 
     return MaterialApp.router(
@@ -47,7 +44,6 @@ class AppWidget extends ConsumerWidget {
           bodySmall: TextStyle(color: cores.preto),
         ),
       ),
-      // Use o provider no routerConfig
       routerConfig: router,
     );
   }
