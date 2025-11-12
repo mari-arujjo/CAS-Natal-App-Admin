@@ -23,6 +23,7 @@ import 'package:cas_natal_app_admin/pages/login_cadastro_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cas_natal_app_admin/widgets/vizualizacao/carregando_widget.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _rootNavigatorGestao = GlobalKey<NavigatorState>(debugLabel: 'shellGestao');
@@ -39,18 +40,24 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     navigatorKey: _rootNavigatorKey,
 
     redirect: (BuildContext context, GoRouterState state) {
-      /*final isLoggedIn = authState.hasValue && authState.value != null;
-      final isGoingToLogin = state.matchedLocation == '/login';
+      final isLoggedIn = authState.hasValue && authState.value != null;
+      final isGoingToLogin = state.matchedLocation == '/loginRegister';
       if (!isLoggedIn && !isGoingToLogin) {
-        return '/login';
+        return '/loginRegister';
       }
       if (isLoggedIn && isGoingToLogin) {
         return '/admin';
       }
-      */return null;
+      return null;
     },
 
     routes: <RouteBase>[
+      GoRoute(
+        path: '/splash',
+        name: 'Splash',
+        builder: (context, state) => const CarregandoWidget(),
+      ),
+
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return NavigationBarWidget(navigationShell: navigationShell);

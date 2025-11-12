@@ -34,17 +34,11 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
     final cor = Cores();
 
     ref.listen<AsyncValue<AppUserModel?>>(authControllerProvider, (previous, next) {
-      if (next.isLoading) {
-        popUp.PopUpAlert(context, '');
-      }
-      
       if (next.hasError) {
-        //Navigator.pop(context);
         popUp.PopUpAlert(context, next.error.toString());
       }
       
       if (next.hasValue && next.value != null) {
-        //Navigator.pop(context);
         final user = next.value; 
         print('--- LOGIN REALIZADO COM SUCESSO ---');
         print('Usuário: ${user?.userName}');
@@ -132,11 +126,7 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
                     popUp.PopUpAlert(context, "Preencha usuário e senha.");
                     return;
                   }
-                  try {
-                    ref.read(authControllerProvider.notifier).login(username, password);
-                  } catch(e){
-                    popUp.PopUpAlert(context, e);
-                  }
+                  ref.read(authControllerProvider.notifier).login(username, password);
               },
               tam: 1000,
             ),

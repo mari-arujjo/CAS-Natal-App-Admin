@@ -116,21 +116,20 @@ class _ConfiguracoesPageState extends ConsumerState<ConfiguracoesPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Você não está logado! :(',
+              'Você não está logado :(',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Image.asset('assets/offline.png'),
+            const SizedBox(height: 30),
             BotaoLaranjaWidget(
-              txt: 'Entre ou cadastre-se',
+              txt: 'Entre ou cadastre-se agora!',
               onPressed: () {
                 context.pushNamed('LoginRegister');
               },
               tam: 360,
             ),
-            const SizedBox(height: 30),
           ],
         ),
       ),
