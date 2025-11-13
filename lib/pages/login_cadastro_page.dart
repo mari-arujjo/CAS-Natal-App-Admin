@@ -1,4 +1,3 @@
-import 'package:cas_natal_app_admin/API/entidades/appuser/appuser_model.dart';
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/popup.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';
@@ -7,8 +6,6 @@ import 'package:cas_natal_app_admin/widgets/inputs/ipt_senha_outline_widget.dart
 import 'package:cas_natal_app_admin/widgets/vizualizacao/container_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cas_natal_app_admin/API/providers/auth_provider.dart';
-import 'package:go_router/go_router.dart';
 
 class LoginRegisterPage extends ConsumerStatefulWidget {
   const LoginRegisterPage({super.key});
@@ -32,21 +29,6 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
   @override
   Widget build(BuildContext context) {
     final cor = Cores();
-
-    ref.listen<AsyncValue<AppUserModel?>>(authControllerProvider, (previous, next) {
-      if (next.hasError) {
-        popUp.PopUpAlert(context, next.error.toString());
-      }
-      
-      if (next.hasValue && next.value != null) {
-        final user = next.value; 
-        print('--- LOGIN REALIZADO COM SUCESSO ---');
-        print('Usuário: ${user?.userName}');
-        print('Token: ${user?.token}');
-        print('-------------------------------------');
-        context.go('/admin');
-      }
-    });
 
     return DefaultTabController(
       length: 2,
@@ -126,7 +108,6 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
                     popUp.PopUpAlert(context, "Preencha usuário e senha.");
                     return;
                   }
-                  ref.read(authControllerProvider.notifier).login(username, password);
               },
               tam: 1000,
             ),
@@ -201,13 +182,6 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
                     popUp.PopUpAlert(context, "Preencha todos os campos.");
                     return;
                   }
-
-                  ref.read(authControllerProvider.notifier).register(
-                    fullName: name,
-                    userName: username,
-                    email: email,
-                    password: pass1,
-                  );
                 },
               tam: 1000,
             ),

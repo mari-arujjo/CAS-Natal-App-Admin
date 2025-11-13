@@ -1,6 +1,5 @@
 import 'package:cas_natal_app_admin/API/entidades/course/course_model.dart';
 import 'package:cas_natal_app_admin/API/entidades/lesson/lesson_model.dart';
-import 'package:cas_natal_app_admin/API/providers/auth_provider.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20Users/gestao_users_page.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/aula_page.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/cadastro_aula_page.dart';
@@ -31,15 +30,13 @@ final _rootNavigatorEstatistica = GlobalKey<NavigatorState>(debugLabel: 'shellEs
 final _rootNavigatorConfiguracoes = GlobalKey<NavigatorState>(debugLabel: 'shellConfiguracoes');
 
 final goRouterProvider = Provider<GoRouter>((ref) {
-  
-  final authState = ref.watch(authControllerProvider);
 
   return GoRouter(
     debugLogDiagnostics: true,
     initialLocation: '/admin',
     navigatorKey: _rootNavigatorKey,
 
-    redirect: (BuildContext context, GoRouterState state) {
+    /*redirect: (BuildContext context, GoRouterState state) {
       final isLoggedIn = authState.hasValue && authState.value != null;
       final isGoingToLogin = state.matchedLocation == '/loginRegister';
       if (!isLoggedIn && !isGoingToLogin) {
@@ -49,7 +46,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         return '/admin';
       }
       return null;
-    },
+    },*/
 
     routes: <RouteBase>[
       GoRoute(
