@@ -1,5 +1,6 @@
 import 'package:cas_natal_app_admin/API/entidades/course/course_model.dart';
 import 'package:cas_natal_app_admin/API/entidades/lesson/lesson_model.dart';
+import 'package:cas_natal_app_admin/API/providers/appuser_provider.dart'; // Importar para ler o storage
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20Users/gestao_users_page.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/aula_page.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/cadastro_aula_page.dart';
@@ -33,20 +34,35 @@ final goRouterProvider = Provider<GoRouter>((ref) {
 
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: '/admin',
+    initialLocation: '/admin', // Pode manter /admin, o redirect cuida do resto
     navigatorKey: _rootNavigatorKey,
 
-    /*redirect: (BuildContext context, GoRouterState state) {
-      final isLoggedIn = authState.hasValue && authState.value != null;
+    // Lógica de redirecionamento automático
+    redirect: (BuildContext context, GoRouterState state) async {
+      // 1. Lê o provider do storage
+      final storage = ref.read(secureStorageProvider);
+      // 2. Tenta ler o token (operação assíncrona)
+      final token = await storage.read(key: 'token');
+      // 3. Define se o usuário está logado
+      final isLoggedIn = token != null && token.isNotEmpty;
+      
+      // 4. Define se a rota que o usuário está tentando acessar é a de login
       final isGoingToLogin = state.matchedLocation == '/loginRegister';
+
+      // 5. Lógica de Redirecionamento
+      // Se NÃO está logado E NÃO está indo para o login, force-o a ir para o login
       if (!isLoggedIn && !isGoingToLogin) {
         return '/loginRegister';
       }
+      
+      // Se ESTÁ logado E está tentando ir para o login, mande-o para a home (/admin)
       if (isLoggedIn && isGoingToLogin) {
         return '/admin';
       }
+
+      // Em todos os outros casos, não faça nada (deixe o usuário ir para onde ele quer)
       return null;
-    },*/
+    },
 
     routes: <RouteBase>[
       GoRoute(
@@ -216,6 +232,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         ],
       ),
 
+      // Rota de Login (fora da navegação principal)
       GoRoute(
         path: '/loginRegister',
         name: 'LoginRegister',
