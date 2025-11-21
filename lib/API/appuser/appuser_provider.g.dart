@@ -189,3 +189,42 @@ abstract class _$AppUserNotifier extends $AsyncNotifier<List<AppUserModel>> {
     element.handleValue(ref, created);
   }
 }
+
+@ProviderFor(currentUser)
+const currentUserProvider = CurrentUserProvider._();
+
+final class CurrentUserProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<AppUserModel?>,
+          AppUserModel?,
+          FutureOr<AppUserModel?>
+        >
+    with $FutureModifier<AppUserModel?>, $FutureProvider<AppUserModel?> {
+  const CurrentUserProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentUserProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentUserHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<AppUserModel?> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<AppUserModel?> create(Ref ref) {
+    return currentUser(ref);
+  }
+}
+
+String _$currentUserHash() => r'25e8346d4392413b26c055a7d71f164fa8898365';

@@ -1,4 +1,4 @@
-import 'package:cas_natal_app_admin/API/entidades/lesson/lesson_model.dart';
+import 'package:cas_natal_app_admin/API/lesson/lesson_model.dart';
 import 'package:cas_natal_app_admin/popup.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';
 import 'package:cas_natal_app_admin/widgets/inputs/input_content_widget.dart';

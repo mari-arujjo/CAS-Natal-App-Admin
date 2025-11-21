@@ -1,5 +1,5 @@
-import 'package:cas_natal_app_admin/API/providers/appuser_provider.dart'; // Importe seu provider
-import 'package:go_router/go_router.dart'; // Para navegação
+import 'package:cas_natal_app_admin/API/appuser/appuser_provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/popup.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';
@@ -19,18 +19,87 @@ class LoginRegisterPage extends ConsumerStatefulWidget {
 class _LoginState extends ConsumerState<LoginRegisterPage> {
   final TextEditingController usernameLoginCtrl = TextEditingController();
   final TextEditingController passwordLoginCtrl = TextEditingController();
-
   final TextEditingController nameCadastroCtrl = TextEditingController();
   final TextEditingController usernameCadastroCtrl = TextEditingController();
   final TextEditingController emailCadastroCtrl = TextEditingController();
   final TextEditingController passwordCadastroCtrl = TextEditingController();
   final TextEditingController password2CadastroCtrl = TextEditingController();
-  
+  final cor = Cores();
   final PopUp popUp = PopUp();
+
+  void showLoading(){
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(color: cor.laranja)
+      ),
+    );
+  }
+
+  void asyncLogin() async {
+    final username = usernameLoginCtrl.text;
+    final password = passwordLoginCtrl.text;
+    if(username.isEmpty || password.isEmpty) {
+      popUp.PopUpAlert(context, "Preencha usuário e senha.");
+      return;
+    }
+    showLoading();
+    try {
+      final user = await ref.read(userRepositoryProvider).login(userName: username,password: password);
+      if (!mounted) return;
+      Navigator.of(context).pop();
+      if (user.token != null && user.token!.isNotEmpty) {
+        await ref.read(secureStorageProvider).write(key: 'token', value: user.token!);
+        if (!mounted) return;
+        context.pushReplacement('/admin');
+      }
+    } catch (e) {
+      if (!mounted) return;
+      Navigator.of(context).pop();
+      popUp.PopUpAlert(context, e);
+    }
+  }
+
+  void asyncRegisterLogin() async {
+    final name = nameCadastroCtrl.text;
+    final username = usernameCadastroCtrl.text;
+    final email = emailCadastroCtrl.text;
+    final pass1 = passwordCadastroCtrl.text;
+    final pass2 = password2CadastroCtrl.text;
+    
+    if (pass1 != pass2) {
+      popUp.PopUpAlert(context, "As senhas não conferem.");
+      return;
+    }
+    if(name.isEmpty || username.isEmpty || email.isEmpty || pass1.isEmpty) {
+      popUp.PopUpAlert(context, "Preencha todos os campos.");
+      return;
+    }
+
+    showLoading();
+
+    try {
+      await ref.read(userRepositoryProvider).register(fullName: name, userName: username, email: email, password: pass1);
+      final user = await ref.read(userRepositoryProvider).login(userName: username,password: pass1);
+      if (!mounted) return;
+      Navigator.of(context).pop();
+      if (user.token != null && user.token!.isNotEmpty) {
+        await ref.read(secureStorageProvider).write(key: 'token', value: user.token!);
+        if (!mounted) return;
+        context.pushReplacement('/admin');
+      }
+    } catch (e) {
+      if (!mounted) return;
+      Navigator.of(context).pop();
+      popUp.PopUpAlert(context, e);
+      rethrow;
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    final cor = Cores();
 
     return DefaultTabController(
       length: 2,
@@ -41,29 +110,11 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
             indicatorColor: cor.azulEscuro,
             labelColor: cor.azulEscuro,
             unselectedLabelColor: Colors.grey,
-            tabs: [
-              Tab(text: 'Login'),
-              Tab(text: 'Cadastro'),
-            ],
+            tabs: [Tab(text: 'Login'), Tab(text: 'Cadastro')],
           ),
         ),
         body: TabBarView(
-          children: [
-            _buildLoginForm(cor),
-            _buildRegisterForm(cor),
-          ],
-        ),
-        bottomNavigationBar: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 20, top: 20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('CAS Natal/RN + IFRN', style: TextStyle(fontSize: 12, color: cor.gray)),
-                Text('Desenvolvido por Mariana Araújo', style: TextStyle(fontSize: 12, color: cor.gray)),
-              ],
-            ),
-          ),
+          children: [_buildLoginForm(cor), _buildRegisterForm(cor)],
         ),
       ),
     );
@@ -72,30 +123,20 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
   Widget _buildLoginForm(Cores cor) {
     return SingleChildScrollView(
       child: Padding(
-        padding:
-            const EdgeInsets.only(top: 70, bottom: 20, left: 20, right: 20),
+        padding: const EdgeInsets.all(20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset('assets/avatar/menino2.png', height: 150),
             SizedBox(height: 20),
             Text('Bem vindo de volta!', style: TextStyle(fontSize: 18)),
             SizedBox(height: 20),
-              ContainerWidget(
+            ContainerWidget(
               child: Form(
                 child: Column(
                   children: [
-                    InputOutline(
-                      txt: "Usuário",
-                      ico: Icon(Icons.person),
-                      controller: usernameLoginCtrl,
-                    ),
+                    InputOutline(txt: "Usuário", ico: Icon(Icons.person), controller: usernameLoginCtrl),
                     SizedBox(height: 15),
-                    InputOutlineSenha(
-                      txt: "Senha",
-                      controller: passwordLoginCtrl,
-                    ),
+                    InputOutlineSenha(txt: "Senha", controller: passwordLoginCtrl),
                   ],
                 ),
               ),
@@ -104,43 +145,7 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
             BotaoLaranjaWidget(
               txt: 'Entrar',
               onPressed: () async { 
-                  final username = usernameLoginCtrl.text;
-                  final password = passwordLoginCtrl.text;
-                  if(username.isEmpty || password.isEmpty) {
-                    popUp.PopUpAlert(context, "Preencha usuário e senha.");
-                    return;
-                  }
-
-                  // --- Início da Lógica de API ---
-                  try {
-                    // 1. Chama o repositório
-                    final user = await ref.read(userRepositoryProvider).login(
-                          userName: username,
-                          password: password,
-                        );
-
-                    // 2. VERIFICA O TOKEN (CRÍTICO!)
-                    if (user.token != null && user.token!.isNotEmpty) {
-                      // 3. Usa o 'ref' para acessar o secureStorage e salvar o token
-                      await ref.read(secureStorageProvider).write(
-                            key: 'token',
-                            value: user.token!,
-                          );
-                      
-                      // 4. Navega para a tela principal
-                      // Usamos pushReplacement para que o usuário não possa "voltar" para o login
-                      context.pushReplacement('/admin');
-
-                    } else {
-                      // Se a API não retornar um token, é um erro
-                      popUp.PopUpAlert(context, "Login falhou. Token não recebido.");
-                    }
-
-                  } catch (e) {
-                    // 5. Erro! Mostra o erro (Ex: "Usuário ou senha inválidos")
-                    popUp.PopUpAlert(context, "Erro ao entrar: ${e.toString()}");
-                  }
-                  // --- Fim da Lógica de API ---
+                asyncLogin();
               },
               tam: 1000,
             ),
@@ -151,47 +156,28 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
   }
 
   Widget _buildRegisterForm(Cores cor) {
-    return SingleChildScrollView(
+     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+        padding: EdgeInsets.all(20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset('assets/avatar/menina2.png', height: 130),
             SizedBox(height: 20),
             Text('Crie agora a sua conta!', style: TextStyle(fontSize: 18)),
             SizedBox(height: 20),
-              ContainerWidget(
+            ContainerWidget(
               child: Form(
                 child: Column(
                   children: [
-                    InputOutline(
-                      txt: "Nome",
-                      ico: Icon(Icons.person),
-                      controller: nameCadastroCtrl,
-                    ),
+                    InputOutline(txt: "Nome", ico: Icon(Icons.person), controller: nameCadastroCtrl),
                     SizedBox(height: 15),
-                    InputOutline(
-                      txt: "Username",
-                      ico: Icon(Icons.alternate_email),
-                      controller: usernameCadastroCtrl,
-                    ),
+                    InputOutline(txt: "Username", ico: Icon(Icons.alternate_email), controller: usernameCadastroCtrl),
                     SizedBox(height: 15),
-                    InputOutline(
-                      txt: "Email",
-                      ico: Icon(Icons.email),
-                      controller: emailCadastroCtrl,
-                    ),
+                    InputOutline(txt: "Email", ico: Icon(Icons.email), controller: emailCadastroCtrl),
                     SizedBox(height: 15),
-                    InputOutlineSenha(
-                      txt: "Senha",
-                      controller: passwordCadastroCtrl,
-                    ),
-                    SizedBox(height: 15),InputOutlineSenha(
-                      txt: "Confirmar senha",
-                      controller: password2CadastroCtrl,
-                    ),
+                    InputOutlineSenha(txt: "Senha", controller: passwordCadastroCtrl),
+                    SizedBox(height: 15),
+                    InputOutlineSenha(txt: "Confirmar senha", controller: password2CadastroCtrl),
                   ],
                 ),
               ),
@@ -200,42 +186,7 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
             BotaoLaranjaWidget(
               txt: 'Cadastrar',
               onPressed: () async {
-                  final name = nameCadastroCtrl.text;
-                  final username = usernameCadastroCtrl.text;
-                  final email = emailCadastroCtrl.text;
-                  final pass1 = passwordCadastroCtrl.text;
-                  final pass2 = password2CadastroCtrl.text;
-
-                  if (pass1 != pass2) {
-                    popUp.PopUpAlert(context, "As senhas não conferem.");
-                    return;
-                  }
-                  
-                  if(name.isEmpty || username.isEmpty || email.isEmpty || pass1.isEmpty) {
-                    popUp.PopUpAlert(context, "Preencha todos os campos.");
-                    return;
-                  }
-
-                  // --- Início da Lógica de API ---
-                  try {
-                    // 1. Usa o 'ref' para ler o provedor do repositório
-                    await ref.read(userRepositoryProvider).register(
-                          fullName: name,
-                          userName: username,
-                          email: email,
-                          password: pass1,
-                        );
-
-                    // 2. Sucesso! Mostra um pop-up e move para a tela de login
-                    popUp.PopUpAlert(context, "Cadastro realizado com sucesso! Faça o login.");
-                    // Move para a primeira aba (Login)
-                    DefaultTabController.of(context).animateTo(0); 
-
-                  } catch (e) {
-                    // 3. Erro! Mostra o erro da API
-                    popUp.PopUpAlert(context, "Erro ao cadastrar: ${e.toString()}");
-                  }
-                  // --- Fim da Lógica de API ---
+                  asyncRegisterLogin();
                 },
               tam: 1000,
             ),

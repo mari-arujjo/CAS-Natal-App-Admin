@@ -1,9 +1,9 @@
 // ignore_for_file: override_on_non_overriding_member
-
-import 'package:cas_natal_app_admin/API/entidades/glossary/glossary_model.dart';
-import 'package:cas_natal_app_admin/API/entidades/glossary/glossary_repository.dart';
+import 'package:cas_natal_app_admin/API/glossary/glossary_model.dart';
+import 'package:cas_natal_app_admin/API/glossary/glossary_repository.dart';
 import 'package:cas_natal_app_admin/API/http_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 part 'glossary_provider.g.dart';
 
 @riverpod 

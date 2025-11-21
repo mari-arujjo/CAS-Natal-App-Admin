@@ -1,8 +1,8 @@
-import 'package:cas_natal_app_admin/API/providers/appuser_provider.dart';
-import 'package:cas_natal_app_admin/API/providers/course_provider.dart';
-import 'package:cas_natal_app_admin/API/providers/enrollment_provider.dart';
-import 'package:cas_natal_app_admin/API/providers/glossary_provider.dart';
-import 'package:cas_natal_app_admin/API/providers/lesson_provider.dart';
+import 'package:cas_natal_app_admin/API/appuser/appuser_provider.dart';
+import 'package:cas_natal_app_admin/API/course/course_provider.dart';
+import 'package:cas_natal_app_admin/API/enrollment/enrollment_provider.dart';
+import 'package:cas_natal_app_admin/API/glossary/glossary_provider.dart';
+import 'package:cas_natal_app_admin/API/lesson/lesson_provider.dart';
 import 'package:cas_natal_app_admin/widgets/estatistica/card_estatistica_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -6,6 +6,7 @@ class AppUserModel {
   final String? password;
   final String? phoneNumber;
   final String? token;
+  final String? privateRole;
 
   AppUserModel({
     this.id,
@@ -15,6 +16,7 @@ class AppUserModel {
     this.password,
     this.phoneNumber,
     this.token,
+    this.privateRole
   });
 
   factory AppUserModel.fromMap(Map<String, dynamic> map) {
@@ -25,7 +27,8 @@ class AppUserModel {
       email: map['email'] ?? '',
       password: map['passwordHash'],
       phoneNumber: map['phoneNumber'],
-      token: map['token']
+      token: map['token'],
+      privateRole: map['privateRole'],
     );
   }
 
@@ -38,6 +41,7 @@ class AppUserModel {
       'passwordHash': password,
       'phoneNumber': phoneNumber,
       'token': token,
+      'privateRole': privateRole
     };
   }
 }

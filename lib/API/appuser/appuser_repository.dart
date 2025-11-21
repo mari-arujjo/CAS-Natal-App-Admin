@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:cas_natal_app_admin/API/entidades/appuser/appuser_model.dart';
+import 'package:cas_natal_app_admin/API/appuser/appuser_model.dart';
 import 'package:cas_natal_app_admin/API/http_client.dart';
 
 class AppUserRepository {
@@ -36,8 +36,8 @@ class AppUserRepository {
         final erro = body['errors'] as Map<String, dynamic>;
         final key = erro.keys.first;
         final value = (erro[key] as List).first;
-        final msg = 'Campo: $key \n($value)';
-        throw Exception(msg);
+        final msg = '$value';
+        throw msg;
       }
     }
 
@@ -60,15 +60,19 @@ class AppUserRepository {
       headers: {'Content-type': 'application/json'},
       body: jsonEncode(requestBody),
     );
-    if (response.statusCode == 401){
+
+    if (response.statusCode == 401) throw response.body; 
+    
+    if (response.statusCode != 200 ){
       final body = jsonDecode(response.body);
       if (body['errors'] != null){
         final erro = body['errors'] as Map<String, dynamic>;
         final key = erro.keys.first;
         final value = (erro[key] as List).first;
         final msg = 'Campo: $key \n($value)';
-        throw Exception(msg);
+        throw msg;
       }
+      throw Exception('Erro desconhecido no login.');
     }
     try{
       final body = jsonDecode(response.body);

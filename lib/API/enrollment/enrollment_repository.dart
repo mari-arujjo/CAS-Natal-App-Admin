@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:cas_natal_app_admin/API/entidades/enrollment/enrollment_model.dart';
+import 'package:cas_natal_app_admin/API/enrollment/enrollment_model.dart';
 import 'package:cas_natal_app_admin/API/http_client.dart';
 
 class EnrollmentRepository {
