@@ -53,6 +53,7 @@ Future<AppUserModel?> currentUser(Ref ref) async {
                 ?? decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']
                 ?? '';
   final userName = decodedToken['unique_name'] ?? '';
+  final privateRole = decodedToken['privateRole'] ?? 'Default';
 
   return AppUserModel(
     id: decodedToken['jti'], 
@@ -60,5 +61,6 @@ Future<AppUserModel?> currentUser(Ref ref) async {
     email: email,
     userName: userName,
     token: token, 
+    privateRole: privateRole
   );
 }

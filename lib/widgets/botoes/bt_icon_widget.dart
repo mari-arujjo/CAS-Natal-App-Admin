@@ -15,7 +15,7 @@ class _BotaoIconWidgetState extends State<BotaoIconWidget> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () {},
+      onPressed: widget.onPressed,
       icon: widget.icon,
       color: Colors.white,
       style: ButtonStyle(

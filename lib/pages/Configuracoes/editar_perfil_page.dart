@@ -82,7 +82,7 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
                         Stack(
                           alignment: Alignment.bottomRight,
                           children: [
-                            AvatarWidget(tam: 60),
+                            AvatarWidget(tam: 60, imgFile: img, imgBytes: imgBytes),
                             BotaoIconWidget(
                               icon: Icon(Icons.edit), 
                               onPressed: () {  
@@ -125,7 +125,7 @@ class _EditarPerfilPageState extends ConsumerState<EditarPerfilPage> {
                                 SizedBox(height: 5),
                                 InputPadraoWidget(
                                   maxLength: 150,
-                                  readOnly: false,
+                                  readOnly: true,
                                   controller: roleCtrl,
                                 ),
                               ],
