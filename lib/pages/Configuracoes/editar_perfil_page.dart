@@ -1,8 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
-
-import 'package:cas_natal_app_admin/API/appuser/appuser_model.dart';
-import 'package:cas_natal_app_admin/API/appuser/appuser_provider.dart';
+import 'package:cas_natal_app_admin/src/appuser/appuser_model.dart';
+import 'package:cas_natal_app_admin/src/appuser/appuser_provider.dart';
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/widgets/botoes/bt_icon_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';

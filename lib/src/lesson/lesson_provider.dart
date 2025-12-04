@@ -1,6 +1,6 @@
-import 'package:cas_natal_app_admin/API/lesson/lesson_model.dart';
-import 'package:cas_natal_app_admin/API/lesson/lesson_repository.dart';
-import 'package:cas_natal_app_admin/API/http_client.dart';
+import 'package:cas_natal_app_admin/src/lesson/lesson_model.dart';
+import 'package:cas_natal_app_admin/src/lesson/lesson_repository.dart';
+import 'package:cas_natal_app_admin/src/http_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'lesson_provider.g.dart';

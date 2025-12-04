@@ -1,6 +1,6 @@
-import 'package:cas_natal_app_admin/API/course/course_model.dart';
-import 'package:cas_natal_app_admin/API/lesson/lesson_model.dart';
-import 'package:cas_natal_app_admin/API/appuser/appuser_provider.dart'; // Importar para ler o storage
+import 'package:cas_natal_app_admin/src/course/course_model.dart';
+import 'package:cas_natal_app_admin/src/lesson/lesson_model.dart';
+import 'package:cas_natal_app_admin/src/appuser/appuser_provider.dart'; // Importar para ler o storage
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20Users/gestao_users_page.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/aula_page.dart';
 import 'package:cas_natal_app_admin/pages/Admin/Gestao%20aula/cadastro_aula_page.dart';

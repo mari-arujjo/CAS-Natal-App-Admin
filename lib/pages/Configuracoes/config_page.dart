@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:cas_natal_app_admin/API/appuser/appuser_provider.dart';
+import 'package:cas_natal_app_admin/src/appuser/appuser_provider.dart';
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_laranja_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes/bt_menu_widget.dart';

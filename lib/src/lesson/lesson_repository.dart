@@ -1,36 +1,36 @@
 import 'dart:convert';
-import 'package:cas_natal_app_admin/API/glossary/glossary_model.dart';
-import 'package:cas_natal_app_admin/API/http_client.dart';
+import 'package:cas_natal_app_admin/src/lesson/lesson_model.dart';
+import 'package:cas_natal_app_admin/src/http_client.dart';
 
-class GlossaryRepository {
+class LessonRepository {
   final IHttpClient client;
-  GlossaryRepository({required this.client});
+  LessonRepository({required this.client});
 
-  Future<List<GlossaryModel>> getGlossaries() async {
-    final response = await client.get(url: 'https://cas-natal-api.onrender.com/CASNatal/glossaries');
+  Future<List<LessonModel>> getLessons() async {
+    final response = await client.get(url:'https://cas-natal-api.onrender.com/CASNatal/lessons');
     try{
       final body = jsonDecode(response.body) as List;
-      return body.map((item) => GlossaryModel.fromMap(item)).toList();
+      return body.map((item) => LessonModel.fromMap(item)).toList();
     }catch(e){
       throw Exception(e);
     }
   }
 
-  Future<List<GlossaryModel>> getGlossariesWithLessons() async {
-    final response = await client.get(url: 'https://cas-natal-api.onrender.com/CASNatal/glossaries/lessons');
+  Future<List<LessonModel>> getLessonById(String id) async {
+    final response = await client.get(url:'https://cas-natal-api.onrender.com/CASNatal/lessons/$id');
     try{
       final body = jsonDecode(response.body) as List;
-      return body.map((item) => GlossaryModel.fromMap(item)).toList();
+      return body.map((item) => LessonModel.fromMap(item)).toList();
     }catch(e){
       throw Exception(e);
     }
   }
 
-  Future<GlossaryModel> newGlossary(GlossaryModel glossary) async {
+  Future<LessonModel> newLesson(LessonModel lesson) async {
     final response = await client.post(
-      url: 'https://cas-natal-api.onrender.com/CASNatal/glossaries/create',
+      url: 'https://cas-natal-api.onrender.com/CASNatal/lessons/create',
       headers: {'Content-type': 'application/json'},
-      body: jsonEncode(glossary.toMap()),
+      body: jsonEncode(lesson.toMap()),
     );
     if (response.statusCode != 200 && response.statusCode != 201){
       final body = jsonDecode(response.body);
@@ -44,17 +44,17 @@ class GlossaryRepository {
     }
     try{
       final body = jsonDecode(response.body);
-      return GlossaryModel.fromMap(body);
+      return LessonModel.fromMap(body);
     }catch(e){
       throw Exception(e);
     }
   }
 
-  Future<GlossaryModel> updateGlossary(GlossaryModel glossary, String id) async {
+  Future<LessonModel> updateLesson(LessonModel course, String id) async {
     final response = await client.update(
-      url: 'https://cas-natal-api.onrender.com/CASNatal/glossaries/update/$id',
+      url: 'https://cas-natal-api.onrender.com/CASNatal/lessons/update/$id',
       headers: {'Content-type': 'application/json'},
-      body: jsonEncode(glossary.toMap()),
+      body: jsonEncode(course.toMap()),
     );
     if (response.statusCode != 200 && response.statusCode != 201){
       final body = jsonDecode(response.body);
@@ -68,18 +68,19 @@ class GlossaryRepository {
     }
     try{
       final body = jsonDecode(response.body);
-      return GlossaryModel.fromMap(body);
+      return LessonModel.fromMap(body);
     }catch(e){
       throw Exception(e);
     }
   }
 
-  Future<void> deleteGlossary(String id) async {
-    await client.delete(url: 'https://cas-natal-api.onrender.com/CASNatal/glossaries/delete/$id');
+  Future<void> deleteLesson(String id) async {
+    await client.delete(url:'https://cas-natal-api.onrender.com/CASNatal/lessons/delete/$id');
     try{
       return;
-    } catch(e){
+    }catch(e){
       throw Exception(e);
     }
   }
+
 }

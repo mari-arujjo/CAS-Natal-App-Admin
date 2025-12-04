@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+
 class AppUserModel {
   final String? id;
   final String fullName;
@@ -7,6 +11,9 @@ class AppUserModel {
   final String? phoneNumber;
   final String? token;
   final String? privateRole;
+  final bool? active;
+  final Uint8List? avatar;
+
 
   AppUserModel({
     this.id,
@@ -16,7 +23,9 @@ class AppUserModel {
     this.password,
     this.phoneNumber,
     this.token,
-    this.privateRole
+    this.privateRole,
+    this.active,
+    this.avatar
   });
 
   factory AppUserModel.fromMap(Map<String, dynamic> map) {
@@ -29,6 +38,8 @@ class AppUserModel {
       phoneNumber: map['phoneNumber'],
       token: map['token'],
       privateRole: map['privateRole'],
+      active: map['actve'],
+      avatar: map['avatar'] != null && map['avatar'] is String ? base64Decode(map['avatar']) : null,
     );
   }
 
@@ -41,7 +52,9 @@ class AppUserModel {
       'passwordHash': password,
       'phoneNumber': phoneNumber,
       'token': token,
-      'privateRole': privateRole
+      'privateRole': privateRole,
+      'active': active,
+      'avatar': avatar !=null ? base64Encode(avatar!) : null,
     };
   }
 }

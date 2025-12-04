@@ -1,4 +1,4 @@
-import 'package:cas_natal_app_admin/API/appuser/appuser_provider.dart';
+import 'package:cas_natal_app_admin/src/appuser/appuser_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/popup.dart';

@@ -1,7 +1,7 @@
-import 'package:cas_natal_app_admin/API/http_client.dart';
+import 'package:cas_natal_app_admin/src/http_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:cas_natal_app_admin/API/course/course_model.dart';
-import 'package:cas_natal_app_admin/API/course/course_repository.dart';
+import 'package:cas_natal_app_admin/src/course/course_model.dart';
+import 'package:cas_natal_app_admin/src/course/course_repository.dart';
 
 part 'course_provider.g.dart';
 

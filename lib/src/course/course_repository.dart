@@ -1,58 +1,34 @@
 import 'dart:convert';
-import 'package:cas_natal_app_admin/API/lesson/lesson_model.dart';
-import 'package:cas_natal_app_admin/API/http_client.dart';
+import 'package:cas_natal_app_admin/src/course/course_model.dart';
+import 'package:cas_natal_app_admin/src/http_client.dart';
 
-class LessonRepository {
+class CourseRepository {
   final IHttpClient client;
-  LessonRepository({required this.client});
+  CourseRepository({required this.client});
 
-  Future<List<LessonModel>> getLessons() async {
-    final response = await client.get(url:'https://cas-natal-api.onrender.com/CASNatal/lessons');
+  Future<List<CourseModel>> getCourses() async {
+    final response = await client.get(url:'https://cas-natal-api.onrender.com/CASNatal/courses');
     try{
       final body = jsonDecode(response.body) as List;
-      return body.map((item) => LessonModel.fromMap(item)).toList();
+      return body.map((item) => CourseModel.fromMap(item)).toList();
     }catch(e){
       throw Exception(e);
     }
   }
 
-  Future<List<LessonModel>> getLessonById(String id) async {
-    final response = await client.get(url:'https://cas-natal-api.onrender.com/CASNatal/lessons/$id');
+  Future<List<CourseModel>> getCourseById(String id) async {
+    final response = await client.get(url:'https://cas-natal-api.onrender.com/CASNatal/courses/$id');
     try{
       final body = jsonDecode(response.body) as List;
-      return body.map((item) => LessonModel.fromMap(item)).toList();
+      return body.map((item) => CourseModel.fromMap(item)).toList();
     }catch(e){
       throw Exception(e);
     }
   }
 
-  Future<LessonModel> newLesson(LessonModel lesson) async {
+  Future<CourseModel> newCourse(CourseModel course) async {
     final response = await client.post(
-      url: 'https://cas-natal-api.onrender.com/CASNatal/lessons/create',
-      headers: {'Content-type': 'application/json'},
-      body: jsonEncode(lesson.toMap()),
-    );
-    if (response.statusCode != 200 && response.statusCode != 201){
-      final body = jsonDecode(response.body);
-      if (body['errors'] != null){
-        final erro = body['errors'] as Map<String, dynamic>;
-        final key = erro.keys.first;
-        final value = (erro[key] as List).first;
-        final msg = 'Campo: $key \n($value)';
-        throw Exception(msg);
-      }
-    }
-    try{
-      final body = jsonDecode(response.body);
-      return LessonModel.fromMap(body);
-    }catch(e){
-      throw Exception(e);
-    }
-  }
-
-  Future<LessonModel> updateLesson(LessonModel course, String id) async {
-    final response = await client.update(
-      url: 'https://cas-natal-api.onrender.com/CASNatal/lessons/update/$id',
+      url: 'https://cas-natal-api.onrender.com/CASNatal/courses/create',
       headers: {'Content-type': 'application/json'},
       body: jsonEncode(course.toMap()),
     );
@@ -68,14 +44,38 @@ class LessonRepository {
     }
     try{
       final body = jsonDecode(response.body);
-      return LessonModel.fromMap(body);
+      return CourseModel.fromMap(body);
     }catch(e){
       throw Exception(e);
     }
   }
 
-  Future<void> deleteLesson(String id) async {
-    await client.delete(url:'https://cas-natal-api.onrender.com/CASNatal/lessons/delete/$id');
+  Future<CourseModel> updateCourse(CourseModel course, String id) async {
+    final response = await client.update(
+      url: 'https://cas-natal-api.onrender.com/CASNatal/courses/update/$id',
+      headers: {'Content-type': 'application/json'},
+      body: jsonEncode(course.toMap()),
+    );
+    if (response.statusCode != 200 && response.statusCode != 201){
+      final body = jsonDecode(response.body);
+      if (body['errors'] != null){
+        final erro = body['errors'] as Map<String, dynamic>;
+        final key = erro.keys.first;
+        final value = (erro[key] as List).first;
+        final msg = 'Campo: $key \n($value)';
+        throw Exception(msg);
+      }
+    }
+    try{
+      final body = jsonDecode(response.body);
+      return CourseModel.fromMap(body);
+    }catch(e){
+      throw Exception(e);
+    }
+  }
+
+  Future<void> deleteCourse(String id) async {
+    await client.delete(url:'https://cas-natal-api.onrender.com/CASNatal/courses/delete/$id');
     try{
       return;
     }catch(e){

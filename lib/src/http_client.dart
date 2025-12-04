@@ -7,6 +7,8 @@ abstract class IHttpClient{
 
   update({required String url, Map<String, String>? headers, Object? body});
 
+  patch({required String url, Map<String, String>? headers, Object? body});
+
   delete({required String url});
 }
 
@@ -40,4 +42,14 @@ class HttpClient implements IHttpClient{
       body: body
     );
   }
+
+  @override
+  patch({required String url, Map<String, String>? headers, Object? body}) async {
+    return await client.patch(
+      Uri.parse(url),
+      headers: headers,
+      body: body
+    );
+  }
+  
 }

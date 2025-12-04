@@ -1,5 +1,5 @@
 import 'package:cas_natal_app_admin/cores.dart';
-import 'package:cas_natal_app_admin/API/lesson/lesson_provider.dart';
+import 'package:cas_natal_app_admin/src/lesson/lesson_provider.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/bt_lista_widget.dart';
 import 'package:cas_natal_app_admin/widgets/botoes_padrao/flutuante_widget.dart';
 import 'package:cas_natal_app_admin/widgets/inputs/search_widget.dart';

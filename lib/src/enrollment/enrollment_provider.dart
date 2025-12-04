@@ -1,6 +1,6 @@
-import 'package:cas_natal_app_admin/API/enrollment/enrollment_model.dart';
-import 'package:cas_natal_app_admin/API/enrollment/enrollment_repository.dart';
-import 'package:cas_natal_app_admin/API/http_client.dart';
+import 'package:cas_natal_app_admin/src/enrollment/enrollment_model.dart';
+import 'package:cas_natal_app_admin/src/enrollment/enrollment_repository.dart';
+import 'package:cas_natal_app_admin/src/http_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'enrollment_provider.g.dart';

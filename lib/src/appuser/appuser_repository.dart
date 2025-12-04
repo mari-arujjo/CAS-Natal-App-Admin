@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:cas_natal_app_admin/API/appuser/appuser_model.dart';
-import 'package:cas_natal_app_admin/API/http_client.dart';
+import 'package:cas_natal_app_admin/src/appuser/appuser_model.dart';
+import 'package:cas_natal_app_admin/src/http_client.dart';
 
 class AppUserRepository {
   final IHttpClient client;
@@ -82,17 +82,30 @@ class AppUserRepository {
     }
   }
 
-   Future<AppUserModel> update({
+  Future<AppUserModel> update({
     required String token,
     String? fullName,
     String? userName,
     String? email,
     bool? active,
    }) async {
-    final response = await client.update(
+
+    final Map<String, dynamic> requestBody = {};
+    if (fullName!=null) requestBody['name'] = fullName;
+    if (userName!=null) requestBody['username'] = userName;
+    if (email!=null) requestBody['email'] = email;
+    if (active!=null) requestBody['active'] = active;
+    if (requestBody.isEmpty){
+      throw Exception('Nenhum dado fornecido para atualização.');
+    }
+
+    final response = await client.patch(
       url: 'https://cas-natal-api.onrender.com/CASNatal/account/update',
-      headers: {'Content-type': 'application/json'},
-      body: jsonEncode(),
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer $token', 
+      },
+      body: jsonEncode(requestBody),
     );
 
     if (response.statusCode == 401) throw response.body; 
@@ -106,7 +119,44 @@ class AppUserRepository {
         final msg = 'Campo: $key \n($value)';
         throw msg;
       }
-      throw Exception('Erro desconhecido no login.');
+      throw Exception('Erro desconhecido na atualização dos dados.');
+    }
+    try{
+      final body = jsonDecode(response.body);
+      return AppUserModel.fromMap(body);
+    }catch(e){
+      throw Exception(e);
+    }
+  }
+
+  Future<AppUserModel> updateAvatar({required String token,String? avatar}) async {
+    final Map<String, dynamic> requestBody = {};
+    requestBody['avatar'] = avatar;
+    if (requestBody.isEmpty){
+      throw Exception('Nenhum dado fornecido para atualização.');
+    }
+
+    final response = await client.patch(
+      url: 'https://cas-natal-api.onrender.com/CASNatal/account/updateAvatar',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer $token', 
+      },
+      body: jsonEncode(requestBody),
+    );
+
+    if (response.statusCode == 401) throw response.body; 
+    
+    if (response.statusCode != 200 ){
+      final body = jsonDecode(response.body);
+      if (body['errors'] != null){
+        final erro = body['errors'] as Map<String, dynamic>;
+        final key = erro.keys.first;
+        final value = (erro[key] as List).first;
+        final msg = 'Campo: $key \n($value)';
+        throw msg;
+      }
+      throw Exception('Erro desconhecido na atualização dos dados.');
     }
     try{
       final body = jsonDecode(response.body);

@@ -1,6 +1,6 @@
-import 'package:cas_natal_app_admin/API/appuser/appuser_model.dart';
-import 'package:cas_natal_app_admin/API/appuser/appuser_repository.dart';
-import 'package:cas_natal_app_admin/API/http_client.dart';
+import 'package:cas_natal_app_admin/src/appuser/appuser_model.dart';
+import 'package:cas_natal_app_admin/src/appuser/appuser_repository.dart';
+import 'package:cas_natal_app_admin/src/http_client.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';

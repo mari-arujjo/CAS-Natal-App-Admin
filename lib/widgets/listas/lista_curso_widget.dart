@@ -1,5 +1,5 @@
-import 'package:cas_natal_app_admin/API/course/course_model.dart';
-import 'package:cas_natal_app_admin/API/course/course_provider.dart';
+import 'package:cas_natal_app_admin/src/course/course_model.dart';
+import 'package:cas_natal_app_admin/src/course/course_provider.dart';
 import 'package:cas_natal_app_admin/widgets/vizualizacao/carregando_widget.dart';
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:flutter/material.dart';
