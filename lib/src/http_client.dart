@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
 
 abstract class IHttpClient{
-  get({required String url});
-
+  get({required String url, Map<String, String>? headers});
+  
   post({required String url, Map<String, String>? headers, Object? body});
 
   update({required String url, Map<String, String>? headers, Object? body});
@@ -21,8 +21,8 @@ class HttpClient implements IHttpClient{
   }
 
   @override
-  get({required String url}) async {
-    return await client.get(Uri.parse(url));
+  get({required String url, Map<String, String>? headers}) async {
+    return await client.get(Uri.parse(url), headers: headers);
   }
 
   @override

@@ -227,4 +227,42 @@ final class CurrentUserProvider
   }
 }
 
-String _$currentUserHash() => r'25e8346d4392413b26c055a7d71f164fa8898365';
+String _$currentUserHash() => r'3a5e32e063db51b309964851e9f8930326178f71';
+
+@ProviderFor(avatar)
+const avatarProvider = AvatarProvider._();
+
+final class AvatarProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<Uint8List?>,
+          Uint8List?,
+          FutureOr<Uint8List?>
+        >
+    with $FutureModifier<Uint8List?>, $FutureProvider<Uint8List?> {
+  const AvatarProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'avatarProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$avatarHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<Uint8List?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Uint8List?> create(Ref ref) {
+    return avatar(ref);
+  }
+}
+
+String _$avatarHash() => r'97fb197648b243c9bbdef65f006a8722722f6d96';

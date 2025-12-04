@@ -1,4 +1,5 @@
 import 'package:cas_natal_app_admin/src/appuser/appuser_provider.dart';
+import 'package:cas_natal_app_admin/widgets/vizualizacao/dg_loading_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cas_natal_app_admin/cores.dart';
 import 'package:cas_natal_app_admin/popup.dart';
@@ -27,16 +28,6 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
   final cor = Cores();
   final PopUp popUp = PopUp();
 
-  void showLoading(){
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => Center(
-        child: CircularProgressIndicator(color: cor.laranja)
-      ),
-    );
-  }
-
   void asyncLogin() async {
     final username = usernameLoginCtrl.text;
     final password = passwordLoginCtrl.text;
@@ -44,11 +35,13 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
       popUp.PopUpAlert(context, "Preencha usuário e senha.");
       return;
     }
-    showLoading();
+
+    DialogLoadingWidget.showLoading(context);
+
     try {
       final user = await ref.read(userRepositoryProvider).login(userName: username,password: password);
       if (!mounted) return;
-      Navigator.of(context).pop();
+      DialogLoadingWidget.dismiss(context);
       if (user.token != null && user.token!.isNotEmpty) {
         await ref.read(secureStorageProvider).write(key: 'token', value: user.token!);
         if (!mounted) return;
@@ -56,7 +49,7 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
       }
     } catch (e) {
       if (!mounted) return;
-      Navigator.of(context).pop();
+      DialogLoadingWidget.dismiss(context);
       popUp.PopUpAlert(context, e);
     }
   }
@@ -77,13 +70,13 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
       return;
     }
 
-    showLoading();
+    DialogLoadingWidget.showLoading(context);
 
     try {
       await ref.read(userRepositoryProvider).register(fullName: name, userName: username, email: email, password: pass1);
       final user = await ref.read(userRepositoryProvider).login(userName: username,password: pass1);
       if (!mounted) return;
-      Navigator.of(context).pop();
+      DialogLoadingWidget.dismiss(context);
       if (user.token != null && user.token!.isNotEmpty) {
         await ref.read(secureStorageProvider).write(key: 'token', value: user.token!);
         if (!mounted) return;
@@ -91,7 +84,7 @@ class _LoginState extends ConsumerState<LoginRegisterPage> {
       }
     } catch (e) {
       if (!mounted) return;
-      Navigator.of(context).pop();
+      DialogLoadingWidget.dismiss(context);
       popUp.PopUpAlert(context, e);
       rethrow;
     }

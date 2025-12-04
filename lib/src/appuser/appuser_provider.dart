@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cas_natal_app_admin/src/appuser/appuser_model.dart';
 import 'package:cas_natal_app_admin/src/appuser/appuser_repository.dart';
 import 'package:cas_natal_app_admin/src/http_client.dart';
@@ -61,6 +63,22 @@ Future<AppUserModel?> currentUser(Ref ref) async {
     email: email,
     userName: userName,
     token: token, 
-    privateRole: privateRole
+    privateRole: privateRole,
   );
+}
+
+@riverpod
+Future<Uint8List?> avatar(Ref ref) async {
+  final user = await ref.watch(currentUserProvider.future);
+  
+  if (user == null || user.token == null) {
+    return null;
+  }
+  try {
+    final repository = ref.read(userRepositoryProvider);
+    return await repository.fetchAvatar(token: user.token!);
+  } catch (e) {
+    print('Erro ao buscar avatar no provider: $e');
+    return null;
+  }
 }

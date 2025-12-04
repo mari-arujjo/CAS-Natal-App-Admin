@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:cas_natal_app_admin/src/appuser/appuser_model.dart';
 import 'package:cas_natal_app_admin/src/http_client.dart';
 
@@ -16,9 +17,36 @@ class AppUserRepository {
     }
   }
 
+  Future<Uint8List?> fetchAvatar({required String token}) async {
+    final response = await client.get(
+      url: 'https://cas-natal-api.onrender.com/CASNatal/account/avatar',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer $token', 
+      },
+    );
+
+    if (response.statusCode == 204) return null;
+    
+    if (response.statusCode != 200 ){
+       throw Exception('Erro ao buscar o avatar. Status: ${response.statusCode}');
+    }
+
+    final avatarBase64 = response.body;
+    if (avatarBase64.isNotEmpty) {
+      try {
+        return base64Decode(avatarBase64); 
+      } catch (e) {
+        print('Erro ao decodificar Base64 do avatar: $e');
+        return null;
+      }
+    }
+    return null;
+  }
+
   Future<AppUserModel> register({required String fullName, required String userName, required String email, required String password}) async {
     final Map<String, dynamic> requestBody ={
-      'Name': fullName,
+      'name': fullName,
       'username': userName,
       'email': email,
       'password': password,
@@ -157,6 +185,10 @@ class AppUserRepository {
         throw msg;
       }
       throw Exception('Erro desconhecido na atualização dos dados.');
+      
+    }
+    if (response.body.isEmpty) {
+      throw Exception('O servidor retornou sucesso, mas sem dados de usuário para atualização.');
     }
     try{
       final body = jsonDecode(response.body);
