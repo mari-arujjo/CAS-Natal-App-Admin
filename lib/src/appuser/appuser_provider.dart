@@ -30,7 +30,12 @@ class AppUserNotifier extends _$AppUserNotifier{
   @override
   Future<List<AppUserModel>> build() async{
     final repository = ref.read(userRepositoryProvider);
-    return repository.getUsers();
+    final currentUser = await ref.watch(currentUserProvider.future);
+    
+    if (currentUser == null || currentUser.token == null) {
+        return []; 
+    }
+    return repository.fetchUsers(token: currentUser.token!);
   }
 }
 
@@ -78,7 +83,6 @@ Future<Uint8List?> avatar(Ref ref) async {
     final repository = ref.read(userRepositoryProvider);
     return await repository.fetchAvatar(token: user.token!);
   } catch (e) {
-    print('Erro ao buscar avatar no provider: $e');
     return null;
   }
 }

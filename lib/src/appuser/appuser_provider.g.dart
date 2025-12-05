@@ -265,4 +265,4 @@ final class AvatarProvider
   }
 }
 
-String _$avatarHash() => r'97fb197648b243c9bbdef65f006a8722722f6d96';
+String _$avatarHash() => r'5fbd7230ad28ca73556878db754a7104b43c022e';

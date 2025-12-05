@@ -38,8 +38,8 @@ class CourseRepository {
         final erro = body['errors'] as Map<String, dynamic>;
         final key = erro.keys.first;
         final value = (erro[key] as List).first;
-        final msg = 'Campo: $key \n($value)';
-        throw Exception(msg);
+        final msg = '$value';
+        throw msg;
       }
     }
     try{

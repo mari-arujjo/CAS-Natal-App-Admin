@@ -7,8 +7,14 @@ class AppUserRepository {
   final IHttpClient client;
   AppUserRepository({required this.client});
 
-  Future<List<AppUserModel>> getUsers() async {
-    final response = await client.get(url: 'https://cas-natal-api.onrender.com/CASNatal/account/users');
+  Future<List<AppUserModel>> fetchUsers({required String token}) async {
+    final response = await client.get(
+      url: 'https://cas-natal-api.onrender.com/CASNatal/account/users',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer $token', 
+      },
+    );
     try{
       final body = jsonDecode(response.body) as List;
       return body.map((item) => AppUserModel.fromMap(item)).toList();
@@ -37,7 +43,6 @@ class AppUserRepository {
       try {
         return base64Decode(avatarBase64); 
       } catch (e) {
-        print('Erro ao decodificar Base64 do avatar: $e');
         return null;
       }
     }
